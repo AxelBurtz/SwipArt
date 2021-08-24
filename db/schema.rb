@@ -10,10 +10,96 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_08_23_140741) do
+ActiveRecord::Schema.define(version: 2021_08_24_091957) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "artworks", force: :cascade do |t|
+    t.string "title"
+    t.string "mouvement"
+    t.string "museum"
+    t.integer "creation_date"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.bigint "author_id"
+    t.bigint "type_id"
+    t.index ["author_id"], name: "index_artworks_on_author_id"
+    t.index ["type_id"], name: "index_artworks_on_type_id"
+  end
+
+  create_table "authors", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "exhibition_authors", force: :cascade do |t|
+    t.bigint "author_id", null: false
+    t.bigint "exhibition_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["author_id"], name: "index_exhibition_authors_on_author_id"
+    t.index ["exhibition_id"], name: "index_exhibition_authors_on_exhibition_id"
+  end
+
+  create_table "exhibition_types", force: :cascade do |t|
+    t.bigint "type_id", null: false
+    t.bigint "exhibition_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["exhibition_id"], name: "index_exhibition_types_on_exhibition_id"
+    t.index ["type_id"], name: "index_exhibition_types_on_type_id"
+  end
+
+  create_table "exhibitions", force: :cascade do |t|
+    t.string "name"
+    t.string "address"
+    t.string "museum"
+    t.integer "price_expo"
+    t.date "start_date"
+    t.date "end_date"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "likes", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "artwork_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["artwork_id"], name: "index_likes_on_artwork_id"
+    t.index ["user_id"], name: "index_likes_on_user_id"
+  end
+
+  create_table "reviews", force: :cascade do |t|
+    t.text "content"
+    t.integer "rating"
+    t.bigint "user_id", null: false
+    t.bigint "exhibition_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["exhibition_id"], name: "index_reviews_on_exhibition_id"
+    t.index ["user_id"], name: "index_reviews_on_user_id"
+  end
+
+  create_table "types", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "user_exhibitions", force: :cascade do |t|
+    t.datetime "date"
+    t.integer "price"
+    t.string "status"
+    t.bigint "user_id", null: false
+    t.bigint "exhibition_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["exhibition_id"], name: "index_user_exhibitions_on_exhibition_id"
+    t.index ["user_id"], name: "index_user_exhibitions_on_user_id"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -27,4 +113,16 @@ ActiveRecord::Schema.define(version: 2021_08_23_140741) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "artworks", "authors"
+  add_foreign_key "artworks", "types"
+  add_foreign_key "exhibition_authors", "authors"
+  add_foreign_key "exhibition_authors", "exhibitions"
+  add_foreign_key "exhibition_types", "exhibitions"
+  add_foreign_key "exhibition_types", "types"
+  add_foreign_key "likes", "artworks"
+  add_foreign_key "likes", "users"
+  add_foreign_key "reviews", "exhibitions"
+  add_foreign_key "reviews", "users"
+  add_foreign_key "user_exhibitions", "exhibitions"
+  add_foreign_key "user_exhibitions", "users"
 end

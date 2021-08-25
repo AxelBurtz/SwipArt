@@ -4,7 +4,6 @@ require "open-uri"
 filepath_exhib = "storage/exhibitionslist.csv"
 filepath_artworks = "storage/Test-excel.csv"
 csv_options = { col_sep: ';', headers: :first_row }
-# , quote_char: "'"
 
 puts "Deleting all"
 Artwork.delete_all
@@ -24,14 +23,14 @@ user2.save!
 user3 = User.new(email: 'jean@gmail.com', password: "1234567")
 user3.save!
 
-# CSV.foreach(filepath_exhib, csv_options) do |row|
-#   Exhibition.create(name: row[2],
-#     start_date: row[8],
-#     end_date: row[9],
-#     museum: row[12],
-#     address: row[13],
-#     price_expo: row[31] == "payant" ? 0 : 1)
-#   end
+CSV.foreach(filepath_exhib, csv_options) do |row|
+  Exhibition.create(name: row[2],
+                    start_date: row[8],
+                    end_date: row[9],
+                    museum: row[12],
+                    address: row[13],
+                    price_expo: row[31] == "payant" ? 0 : 1)
+end
 
 CSV.foreach(filepath_artworks, csv_options) do |row|
   author = Author.first_or_create(name: row[0])
@@ -41,7 +40,7 @@ CSV.foreach(filepath_artworks, csv_options) do |row|
                  museum: row[5],
                  author: author,
                  type: type)
-  end
+end
 
 
     # puts "user done"

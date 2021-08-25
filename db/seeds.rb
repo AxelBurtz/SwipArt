@@ -2,8 +2,9 @@ require 'csv'
 require "open-uri"
 
 filepath_exhib = "storage/exhibitionslist.csv"
-filepath_artworks = "storage/Test-excel.csv"
-csv_options = { col_sep: ';', headers: :first_row }
+filepath_artworks = "storage/artworks.csv"
+
+csv_options = { col_sep: ';', headers: :first_row, encoding:'iso-8859-1:utf-8' }
 
 puts "Deleting all"
 Artwork.delete_all
@@ -35,40 +36,12 @@ end
 CSV.foreach(filepath_artworks, csv_options) do |row|
   author = Author.first_or_create(name: row[0])
   type = Type.first_or_create(name: row[5])
-  Artwork.create(title: row[3],
+  puts "---- creating"
+  new_art = Artwork.create(title: row[3],
                  mouvement: row[2],
-                 museum: row[5],
+                 museum: row[4],
                  author: author,
                  type: type)
+  file = URI.open(row[6])
+  new_art.photo.attach(io: file, filename: row[3], content_type: 'image/jpg')
 end
-
-
-    # puts "user done"
-
-    # sculpture = Type.create(name: "sculpture")
-    # painting = Type.create(name: "peinture")
-    # ceramic = Type.create(name: "céramique")
-    # puts "type done"
-
-    # dantan = Author.create(name: "Jean-Pierre DANTAN")
-    # forest = Author.create(name: "Jean-Baptiste FOREST")
-    # picart = Author.create(name: "Bernard PICART")
-    # puts "author done"
-
-    # vernet = Artwork.create(title: "Carl Vernet", mouvement: "classique", museum: "Louvre", type: sculpture, author: dantan)
-    # jupiter_and_calisto = Artwork.create(title: "Jupiter et Calisto", mouvement: "mythologique", museum: "Musée Magnin", type: painting, author: forest)
-    # pelerins = Artwork.create(title: "Pèlerins de l'Isle de Cythère", mouvement: "céramique orientale", museum: "Musée de la Compagnie Lorient", type: ceramic, author: picart)
-    # puts "artwork done"
-
-# expo1 = Exhibition.create(name: "Impréssionistes flammands", start_date: Date.today - 5.days, end_date: Date.today + 10.days, museum: "Louvre", price_expo: 20)
-# expo2 = Exhibition.create(name: "Qing", start_date: Date.today - 8.days, end_date: Date.today + 30.days, price_expo: 20)
-# expo3 = Exhibition.create(name: "Céramique", start_date: Date.today - 8.days, end_date: Date.today + 30.days, museum: "Musée de la Compagnie Lorient", price_expo: 50)
-# puts "exhib done"
-
-# exhibitio_auth1 = ExhibitionAuthor.create(author: dantan, exhibition: expo1)
-# exhibitio_auth2 = ExhibitionAuthor.create(author: forest, exhibition: expo3)
-# puts "exhibitio_auth done"
-
-# exhibitio_Type1 = ExhibitionType.create(type: sculpture, exhibition: expo1)
-# exhibitio_Type2 = ExhibitionType.create(type: painting, exhibition: expo3)
-# puts "ExhibitionType done"

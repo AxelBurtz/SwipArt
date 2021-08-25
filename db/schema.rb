@@ -10,7 +10,8 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_08_24_094657) do
+ActiveRecord::Schema.define(version: 2021_08_25_105347) do
+
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -60,6 +61,7 @@ ActiveRecord::Schema.define(version: 2021_08_24_094657) do
     t.date "end_date"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "mouvement"
   end
 
   create_table "favorites", force: :cascade do |t|
@@ -77,6 +79,15 @@ ActiveRecord::Schema.define(version: 2021_08_24_094657) do
     t.index ["favoritor_id", "favoritor_type"], name: "fk_favorites"
     t.index ["favoritor_type", "favoritor_id"], name: "index_favorites_on_favoritor_type_and_favoritor_id"
     t.index ["scope"], name: "index_favorites_on_scope"
+  end
+
+  create_table "likes", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "artwork_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["artwork_id"], name: "index_likes_on_artwork_id"
+    t.index ["user_id"], name: "index_likes_on_user_id"
   end
 
   create_table "reviews", force: :cascade do |t|
@@ -126,6 +137,8 @@ ActiveRecord::Schema.define(version: 2021_08_24_094657) do
   add_foreign_key "exhibition_authors", "exhibitions"
   add_foreign_key "exhibition_types", "exhibitions"
   add_foreign_key "exhibition_types", "types"
+  add_foreign_key "likes", "artworks"
+  add_foreign_key "likes", "users"
   add_foreign_key "reviews", "exhibitions"
   add_foreign_key "reviews", "users"
   add_foreign_key "user_exhibitions", "exhibitions"

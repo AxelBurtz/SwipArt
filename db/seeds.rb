@@ -35,11 +35,17 @@ vernet = Artwork.create(title: "Carl Vernet", mouvement: "classique", museum: "L
 jupiter_and_calisto = Artwork.create(title: "Jupiter et Calisto", mouvement: "mythologique", museum: "Musée Magnin", type: painting, author: forest)
 pelerins = Artwork.create(title: "Pèlerins de l'Isle de Cythère", mouvement: "céramique orientale", museum: "Musée de la Compagnie Lorient", type: ceramic, author: picart)
 puts "artwork done"
+pouet = Artwork.create(title: "Carl pouet", mouvement: "classique", museum: "lala", type: sculpture, author: dantan)
+kloe = Artwork.create(title: "Carl plop", mouvement: "classique", museum: "lala", type: sculpture, author: forest)
+
 
 expo1 = Exhibition.create(name: "Impréssionistes flammands", start_date: Date.today - 5.days, end_date: Date.today + 10.days, museum: "Louvre", price_expo: 20)
 expo2 = Exhibition.create(name: "Qing", start_date: Date.today - 8.days, end_date: Date.today + 30.days, price_expo: 20)
 expo3 = Exhibition.create(name: "Céramique", start_date: Date.today - 8.days, end_date: Date.today + 30.days, museum: "Musée de la Compagnie Lorient", price_expo: 50)
 puts "exhib done"
+expo4 = Exhibition.create(name: "Impréssionistes flammands", start_date: Date.today - 5.days, end_date: Date.today + 10.days, museum: "Louvre", price_expo: 20)
+expo5 = Exhibition.create(name: "Impréssionistes flammands", mouvement: "classique", start_date: Date.today - 5.days, end_date: Date.today + 10.days, museum: "Louvre", price_expo: 20)
+
 
 exhibitio_auth1 = ExhibitionAuthor.create(author: dantan, exhibition: expo1)
 exhibitio_auth2 = ExhibitionAuthor.create(author: forest, exhibition: expo3)

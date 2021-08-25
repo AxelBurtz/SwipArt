@@ -1,10 +1,10 @@
 <h1>Pages#home</h1>
 <p>Find me in app/views/pages/home.html.erb</p>
 
-<%= link_to "like", artwork_like_path(@artworks[1]), method: :post %>
-<%= link_to "like", artwork_like_path(@artworks[2]), method: :post %>
-<%= link_to "like", artwork_like_path(@artworks[3]), method: :post %>
-<%= link_to "like", artwork_like_path(@artworks[4]), method: :post %>
+<% @artworks.each do |artwork| %>
+
+<%= link_to "like", artwork_like_path(artwork), method: :post %>
+<% end %>
 
 <div data-controller="swiper">
   <div class="swiper-container mySwiper">

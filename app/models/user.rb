@@ -49,42 +49,8 @@ class User < ApplicationRecord
 
     abcd = a & b & c & d
 
-    if abcd != []
-      abcd
-    elsif abc != []
-      abc
-    elsif abd != []
-      abd
-    elsif bcd != []
-      bcd
-    elsif cda != []
-      cda
-    elsif ab != []
-      ab
-    elsif ac != []
-      ac
-    elsif ad != []
-      ad
-    elsif bc != []
-      bc
-    elsif bd != []
-      bd
-    elsif cd != []
-      cd
-    elsif a != []
-      a
-    elsif b != []
-      b
-    elsif c != []
-      c
-    elsif d !=[]
-      d
-    else
-      []
-    end
-  end
 
-  result = []
+    result = []
     if abcd != []
       result << abcd
     elsif abc != []
@@ -118,6 +84,16 @@ class User < ApplicationRecord
     else
       []
     end
-  end
 
+    exhibition_recommanded = result.flatten.uniq
+    exhibitions_ids_of_user_treated = UserExhibition.where(exhibition_id: exhibition_recommanded.pluck(:id), user_id: self.id, status: ["booked", "saved", "discarded"] ).pluck(:exhibition_id)
+    exhibition_id_to_recommand = (exhibition_recommanded.pluck(:id) - exhibitions_ids_of_user_treated).first(3)
+    exhibition_to_recommand = Exhibition.where(id: exhibition_id_to_recommand)
+    exhibition_id_saved = UserExhibition.where(user_id: self.id, status: "saved").pluck(:exhibition_id)
+    exhibition_saved = Exhibition.where(id: exhibition_id_saved)
+    return all_exhibition_to_show = [exhibition_recommanded, exhibition_saved].flatten
+  end
 end
+
+
+# current_user.user_exhibitions

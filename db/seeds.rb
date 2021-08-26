@@ -41,8 +41,6 @@ CSV.foreach(filepath_exhib, csv_options) do |row|
   end
 end
 
-
-
 CSV.foreach(filepath_artworks, csv_options) do |row|
   image = FastImage.size(row[6])
   if (image[0]||image[1]) > 2300

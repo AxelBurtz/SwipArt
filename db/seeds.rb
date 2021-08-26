@@ -24,6 +24,7 @@ user2.save!
 user3 = User.new(email: 'jean@gmail.com', password: "1234567")
 user3.save!
 
+
 CSV.foreach(filepath_exhib, csv_options) do |row|
   Exhibition.create(name: row[2],
                     start_date: row[8],

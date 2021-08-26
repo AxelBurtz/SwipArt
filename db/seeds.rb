@@ -2,7 +2,7 @@ require 'csv'
 require "open-uri"
 
 filepath_exhib = "exhibitionslist.csv"
-filepath_artworks = "artworks.csv"
+filepath_artworks = "artworks-sans-jpg.csv"
 
 csv_options = { col_sep: ';', headers: :first_row, encoding:'iso-8859-1:utf-8' }
 
@@ -26,23 +26,35 @@ user3.save!
 
 
 CSV.foreach(filepath_exhib, csv_options) do |row|
-  Exhibition.create(name: row[2],
-                    start_date: row[8],
-                    end_date: row[9],
-                    museum: row[12],
-                    address: row[13],
-                    price_expo: row[31] == "payant" ? 0 : 1)
+  image = FastImage.size(row[33])
+  if (image[0] || image[1]) > 2300
+    puts "image is too big"
+  else
+    new_exhib = Exhibition.create(name: row[2],
+                      start_date: row[8],
+                      end_date: row[9],
+                      museum: row[12],
+                      address: row[13],
+                      price_expo: row[31] == "payant" ? 0 : 1)
+    file = URI.open(row[33])
+    new_exhib.photo.attach(io: file, filename: row[2], content_type: 'image/jpg')
+  end
 end
 
 CSV.foreach(filepath_artworks, csv_options) do |row|
-  author = Author.first_or_create(name: row[0])
-  type = Type.first_or_create(name: row[5])
-  puts "---- creating"
-  new_art = Artwork.create(title: row[3],
-                 mouvement: row[2],
-                 museum: row[4],
-                 author: author,
-                 type: type)
-  # file = URI.open(row[6])
-  # new_art.photo.attach(io: file, filename: row[3], content_type: 'image/jpg')
+  image = FastImage.size(row[6])
+  if (image[0]||image[1]) > 2300
+    puts "image XX is too big"
+  else
+    author = Author.first_or_create(name: row[0])
+    type = Type.first_or_create(name: row[5])
+    puts "---- creating"
+    new_art = Artwork.create(title: row[3],
+                    mouvement: row[2],
+                    museum: row[4],
+                    author: author,
+                    type: type)
+    file = URI.open(row[6])
+    new_art.photo.attach(io: file, filename: row[3], content_type: 'image/jpg')
+  end
 end

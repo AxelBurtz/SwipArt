@@ -6,6 +6,7 @@ class ArtworksController < ApplicationController
     if @user.all_favorites.size % 10 == 0
       redirect_to dashboard_path
     else
+      # A changer en AJAX pour eviter de recharger
       redirect_to root_path
     end
   end

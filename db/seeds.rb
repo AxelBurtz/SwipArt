@@ -43,6 +43,6 @@ CSV.foreach(filepath_artworks, csv_options) do |row|
                  museum: row[4],
                  author: author,
                  type: type)
-  file = URI.open(row[6])
-  new_art.photo.attach(io: file, filename: row[3], content_type: 'image/jpg')
+  # file = URI.open(row[6])
+  # new_art.photo.attach(io: file, filename: row[3], content_type: 'image/jpg')
 end

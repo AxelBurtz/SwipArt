@@ -27,7 +27,7 @@ user3.save!
 
 CSV.foreach(filepath_exhib, csv_options) do |row|
   image = FastImage.size(row[33])
-  if (image[0] || image[1]) > 2300
+  if image && (image[0] || image[1]) > 2300
     puts "image is too big"
   else
     new_exhib = Exhibition.create(name: row[2],

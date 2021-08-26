@@ -3,7 +3,7 @@ class ArtworksController < ApplicationController
     @user = current_user
     @artwork = Artwork.find(params[:artwork_id])
     @user.favorite(@artwork)
-    if @user.all_favorites.size % 10 == 0
+    if @user.all_favorites.size % 5 == 0
       redirect_to dashboard_path
     else
       # A changer en AJAX pour eviter de recharger

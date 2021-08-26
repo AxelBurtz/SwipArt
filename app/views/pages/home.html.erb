@@ -1,8 +1,8 @@
 <div>
   <div class="swiper-container mySwiper" data-controller="swiper">
     <div class="swiper-wrapper">
-      <% @artworks.each do |artwork| %>
-        <div class="swiper-slide" data-id="<%= artwork.id %>"><%= artwork.title %></div>
+      <% @artworks.each_with_index do |artwork, index| %>
+        <div class="swiper-slide" data-swiper-target="slide" data-id="<%= artwork.id %>" data-like-url="<%= like_artwork_path(artwork) %>"><%= index + 1 %> <%= artwork.title %> - id : <%= artwork.id %></div>
       <% end %>
     </div>
     <div class="swiper-pagination"></div>

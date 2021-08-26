@@ -12,7 +12,7 @@ ExhibitionType.delete_all
 User.delete_all
 Type.delete_all
 Exhibition.delete_all
-Reviews.delete_all
+# Review.delete_all
 
 puts "creating user"
 user1 = User.create(email: 'axel@gmail.com', password: "1234567")
@@ -37,6 +37,11 @@ puts "author done"
 vernet = Artwork.create(title: "Carl Vernet", mouvement: "classique", museum: "Louvre", type: sculpture, author: dantan)
 jupiter_and_calisto = Artwork.create(title: "Jupiter et Calisto", mouvement: "mythologique", museum: "Musée Magnin", type: painting, author: forest)
 pelerins = Artwork.create(title: "Pèlerins de l'Isle de Cythère", mouvement: "céramique orientale", museum: "Musée de la Compagnie Lorient", type: ceramic, author: picart)
+oeuvre = Artwork.create(title: "Oeuvre 4", mouvement: "céramique orientale", museum: "Musée de la Compagnie Lorient", type: ceramic, author: picart)
+bonjour = Artwork.create(title: "bonjour", mouvement: "céramique orientale", museum: "Musée de la Compagnie Lorient", type: ceramic, author: picart)
+aurevoir = Artwork.create(title: "aurevoir", mouvement: "céramique orientale", museum: "Musée de la Compagnie Lorient", type: ceramic, author: picart)
+ciao = Artwork.create(title: "ciao", mouvement: "céramique orientale", museum: "Musée de la Compagnie Lorient", type: ceramic, author: picart)
+hello = Artwork.create(title: "hello", mouvement: "céramique orientale", museum: "Musée de la Compagnie Lorient", type: ceramic, author: picart)
 puts "artwork done"
 
 

@@ -1,0 +1,7 @@
+<div class="container">
+      <h1>My arts</h1>
+        <% @user = current_user %>
+        <% if User.all_favorites.count % 5 == 0 %>
+          <%= User.recommandations %>
+        <% end %>
+</div>

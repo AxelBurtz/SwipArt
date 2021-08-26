@@ -1,8 +1,8 @@
 require 'csv'
 require "open-uri"
 
-filepath_exhib = "storage/exhibitionslist.csv"
-filepath_artworks = "storage/artworks.csv"
+filepath_exhib = "exhibitionslist.csv"
+filepath_artworks = "artworks.csv"
 
 csv_options = { col_sep: ';', headers: :first_row, encoding:'iso-8859-1:utf-8' }
 

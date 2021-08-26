@@ -24,6 +24,7 @@ user2.save!
 user3 = User.new(email: 'jean@gmail.com', password: "1234567")
 user3.save!
 
+
 CSV.foreach(filepath_exhib, csv_options) do |row|
   image = FastImage.size(row[33])
   if (image[0] || image[1]) > 2300

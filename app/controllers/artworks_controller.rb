@@ -1,15 +1,20 @@
 class ArtworksController < ApplicationController
   def like
     @user = current_user
-    @artworks = Artwork.find(params[:id])
-    @user.favorite(@artworks)
-    redirect_to root_path
+    @artwork = Artwork.find(params[:artwork_id])
+    @user.favorite(@artwork)
+    if @user.all_favorites.size % 5 == 0
+      redirect_to dashboard_path
+    else
+      # A changer en AJAX pour eviter de recharger
+      redirect_to root_path
+    end
   end
 
   def dislike
     @user = current_user
-    @artworks = Artwork.find(params[:id])
-    @user.unfavorite(@artworks)
+    @artwork = Artwork.find(params[:artwork_id])
+    @user.unfavorite(@artwork)
     redirect_to root_path
   end
 end

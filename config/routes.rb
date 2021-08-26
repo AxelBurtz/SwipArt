@@ -9,4 +9,6 @@ Rails.application.routes.draw do
       post 'dislike'
     end
   end
+
+  get 'dashboard', to: 'pages#dashboard'
 end

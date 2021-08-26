@@ -10,10 +10,31 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_08_24_094657) do
+ActiveRecord::Schema.define(version: 2021_08_25_141251) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "active_storage_attachments", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "record_type", null: false
+    t.bigint "record_id", null: false
+    t.bigint "blob_id", null: false
+    t.datetime "created_at", null: false
+    t.index ["blob_id"], name: "index_active_storage_attachments_on_blob_id"
+    t.index ["record_type", "record_id", "name", "blob_id"], name: "index_active_storage_attachments_uniqueness", unique: true
+  end
+
+  create_table "active_storage_blobs", force: :cascade do |t|
+    t.string "key", null: false
+    t.string "filename", null: false
+    t.string "content_type"
+    t.text "metadata"
+    t.bigint "byte_size", null: false
+    t.string "checksum", null: false
+    t.datetime "created_at", null: false
+    t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
+  end
 
   create_table "artworks", force: :cascade do |t|
     t.string "title"
@@ -61,6 +82,7 @@ ActiveRecord::Schema.define(version: 2021_08_24_094657) do
     t.date "end_date"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "mouvement"
   end
 
   create_table "favorites", force: :cascade do |t|
@@ -78,6 +100,15 @@ ActiveRecord::Schema.define(version: 2021_08_24_094657) do
     t.index ["favoritor_id", "favoritor_type"], name: "fk_favorites"
     t.index ["favoritor_type", "favoritor_id"], name: "index_favorites_on_favoritor_type_and_favoritor_id"
     t.index ["scope"], name: "index_favorites_on_scope"
+  end
+
+  create_table "likes", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "artwork_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["artwork_id"], name: "index_likes_on_artwork_id"
+    t.index ["user_id"], name: "index_likes_on_user_id"
   end
 
   create_table "reviews", force: :cascade do |t|
@@ -121,12 +152,15 @@ ActiveRecord::Schema.define(version: 2021_08_24_094657) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "artworks", "authors"
   add_foreign_key "artworks", "types"
   add_foreign_key "exhibition_authors", "authors"
   add_foreign_key "exhibition_authors", "exhibitions"
   add_foreign_key "exhibition_types", "exhibitions"
   add_foreign_key "exhibition_types", "types"
+  add_foreign_key "likes", "artworks"
+  add_foreign_key "likes", "users"
   add_foreign_key "reviews", "exhibitions"
   add_foreign_key "reviews", "users"
   add_foreign_key "user_exhibitions", "exhibitions"

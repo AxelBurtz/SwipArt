@@ -11,7 +11,7 @@ import 'swiper/swiper-bundle.css';
 import { Controller } from "stimulus"
 import { csrfToken } from "@rails/ujs";
 
-let counter = 0
+// let counter = 0
 
 
 export default class extends Controller {
@@ -45,15 +45,14 @@ export default class extends Controller {
   
   prev(event) {
     console.log("prev -> like")
-    counter += 1
-    console.log(counter)
+    // counter += 1
+    // console.log(counter)
     // console.log(this.swiper.activeIndex)
     // console.log(this.swiper.slides);
 
     // CAREFUL: order is important here!
     const slideToLike = this.swiper.slides[this.swiper.activeIndex + 1];
     const likeUrl = slideToLike.dataset.likeUrl
-
     console.log(slideToLike)
 
     // As soon as we remove a slide, the activeIndex CHANGES
@@ -67,17 +66,20 @@ export default class extends Controller {
       method: 'POST',
       headers: { 'Accept': "application/json", 'X-CSRF-Token': csrfToken() }
     })
+      .then(response => response.json())
+      .then((data) => {
+        console.log(data)
 
-    if (counter == 5) {
-      window.location.href = "/dashboard"
-    }
+        // si data redirect est à true, alors changer la window location avec la valeur stockee dans data url
+        if (data.redirect === true) {
+          window.location.href = data.url 
+        }
+    });
+
+    // if (counter == 5) {
+    //   window.location.href = "/dashboard"
+    // }
   //   if () {
-  //   //   .then(response => response.json())
-  //   //   .then((data) => {
-  //   //     // console.log(data)
-
-  //   //     // si data redirect est à true, alors changer la window location avec la valeur stockee dans data url
-  //   // });
   // }  
   }
 }

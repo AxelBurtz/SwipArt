@@ -52,6 +52,7 @@ class User < ApplicationRecord
 
     result = []
     if abcd != []
+
       result << abcd
     elsif abc != []
       result << abc

@@ -24,14 +24,23 @@ user2.save!
 user3 = User.new(email: 'jean@gmail.com', password: "1234567")
 user3.save!
 
-# CSV.foreach(filepath_exhib, csv_options) do |row|
-#   Exhibition.create(name: row[2],
-#                     start_date: row[8],
-#                     end_date: row[9],
-#                     museum: row[12],
-#                     address: row[13],
-#                     price_expo: row[31] == "payant" ? 0 : 1)
-# end
+CSV.foreach(filepath_exhib, csv_options) do |row|
+  image = FastImage.size(row[33])
+  if (image[0] || image[1]) > 2300
+    puts "image is too big"
+  else
+    new_exhib = Exhibition.create(name: row[2],
+                      start_date: row[8],
+                      end_date: row[9],
+                      museum: row[12],
+                      address: row[13],
+                      price_expo: row[31] == "payant" ? 0 : 1)
+    file = URI.open(row[33])
+    new_exhib.photo.attach(io: file, filename: row[2], content_type: 'image/jpg')
+  end
+end
+
+
 
 CSV.foreach(filepath_artworks, csv_options) do |row|
   image = FastImage.size(row[6])

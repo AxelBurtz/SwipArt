@@ -98,6 +98,7 @@ GEM
       railties (>= 3.2)
     erubi (1.10.0)
     execjs (2.7.0)
+    fastimage (2.2.5)
     ffi (1.15.3)
     font-awesome-sass (5.15.1)
       sassc (>= 1.11)
@@ -267,6 +268,7 @@ DEPENDENCIES
   cloudinary (~> 1.16.0)
   devise
   dotenv-rails
+  fastimage
   font-awesome-sass
   jbuilder (~> 2.7)
   listen (~> 3.2)

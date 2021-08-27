@@ -4,7 +4,11 @@
       <% @artworks.each_with_index do |artwork, index| %>
         <div class="swiper-slide" data-swiper-target="slide" data-id="<%= rand(artwork.id) %>" data-like-url="<%= like_artwork_path(artwork) %>">
           <div class="global">
-            <%= cl_image_tag artwork.photo.key %>
+            <% if artwork.photo.attached? %>
+              <%= cl_image_tag artwork.photo.key %>
+            <% else %>
+              <img src="https://cdn.paris.fr/qfap/2021/08/05/83671_QXZpaml0IEdob3NoIGV4cG9zaXRpb24gZHUgMiBhdSAyOSBBb3V0IGRvc3NpZXIgZGUgcHJlc3NlLmpwZw==.jpg" alt="">
+            <% end  %>
             <div class="show-details">
               <div class="box">
                 <h2><%= artwork.author.name %></h2>

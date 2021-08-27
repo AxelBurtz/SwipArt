@@ -3,8 +3,9 @@ require "open-uri"
 
 filepath_exhib = "exhibitionslist.csv"
 filepath_artworks = "artworks-sans-jpg.csv"
+filepath_exhib_nn = "exhib-nn.csv"
 
-csv_options = { col_sep: ';', headers: :first_row, encoding:'iso-8859-1:utf-8' }
+csv_options = { col_sep: ';', headers: :first_row, encoding: 'iso-8859-1:utf-8' }
 
 puts "Deleting all"
 Artwork.delete_all
@@ -41,12 +42,13 @@ CSV.foreach(filepath_exhib, csv_options) do |row|
 end
 
 CSV.foreach(filepath_artworks, csv_options) do |row|
+  puts "Artworks"
   image = FastImage.size(row[6])
   if (image[0]||image[1]) > 2300
     puts "image XX is too big"
   else
-    author = Author.first_or_create(name: row[0])
-    type = Type.first_or_create(name: row[5])
+    author = Author.where(name: row[0]).first_or_create(name: row[0])
+    type = Type.where(name: row[5]).first_or_create(name: row[5])
     puts "---- creating"
     new_art = Artwork.create(title: row[3],
                     mouvement: row[2],
@@ -55,5 +57,18 @@ CSV.foreach(filepath_artworks, csv_options) do |row|
                     type: type)
     file = URI.open(row[6])
     new_art.photo.attach(io: file, filename: row[3], content_type: 'image/jpg')
+  end
+end
+
+CSV.foreach(filepath_exhib_nn, csv_options) do |row|
+  exhibition = Exhibition.where(name: row[0]).first_or_create(name: row[0])
+  exhibition.update(mouvement: row[2])
+  if !row[3].nil? || row[3] != ""
+    author = Author.where(name: row[3]).first_or_create(name: row[3])
+    ExhibitionAuthor.create(exhibition_id: exhibition.id, author_id: author.id)
+  end
+  if !row[1].nil? || row[1] != ""
+    type = Type.where(name: row[1]).first_or_create(name: row[1])
+    ExhibitionType.create(exhibition_id: exhibition.id, type_id: type.id)
   end
 end

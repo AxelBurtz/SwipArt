@@ -9,6 +9,11 @@ Rails.application.routes.draw do
       post 'dislike'
     end
   end
-  resources :user_exhibitions, only: %i[edit update]
+  resources :user_exhibitions do
+    collection do
+      patch "saved"
+      patch "discarded"
+    end
+  end
   get 'dashboard', to: 'pages#dashboard'
 end

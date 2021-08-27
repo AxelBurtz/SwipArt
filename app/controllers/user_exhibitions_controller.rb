@@ -1,4 +1,6 @@
-class UserExhibitionsController < ApplicationController
+class UserExhibitionsController < ApplicationControllere
+
+
   def edit
     @user_exhibitions = UserExhibition.find(params[:id])
   end
@@ -9,7 +11,17 @@ class UserExhibitionsController < ApplicationController
     redirect_to dashboard_path
   end
 
+  def saved
+    @exhibition = Exhibition.find(params[:exhibition_id])
+    @user_exhibition = UserExhibition.create(user: current_user, exhibition: @exhibition, status: "saved")
+    redirect_to dashboard_path
+  end
 
+  def discarded
+    @exhibition = Exhibition.find(params[:exhibition_id])
+    @user_exhibition = UserExhibition.create(user: current_user, exhibition: @exhibition, status: "discarded")
+    redirect_to dashboard_path
+  end
 
   private
 

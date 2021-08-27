@@ -51,40 +51,21 @@ class User < ApplicationRecord
 
 
     result = []
-    if abcd != []
-
-      result << abcd
-    elsif abc != []
-      result << abc
-    elsif abd != []
-      result << abd
-    elsif bcd != []
-      result << bcd
-    elsif cda != []
-      result << cda
-    elsif ab != []
-      result << ab
-    elsif ac != []
-      result << ac
-    elsif ad != []
-      result << ad
-    elsif bc != []
-      result << bc
-    elsif bd != []
-      result << bd
-    elsif cd != []
-      result << cd
-    elsif a != []
-      result << a
-    elsif b != []
-      result << b
-    elsif c != []
-      result << c
-    elsif d !=[]
-      result << d
-    else
-      []
-    end
+    result << abcd
+    result << abc
+    result << abd
+    result << bcd
+    result << cda
+    result << ab
+    result << ac
+    result << ad
+    result << bc
+    result << bd
+    result << cd
+    result << a
+    result << b
+    result << c
+    result << d
 
     exhibition_recommanded = result.flatten.uniq
     exhibitions_ids_of_user_treated = UserExhibition.where(exhibition_id: exhibition_recommanded.pluck(:id), user_id: self.id, status: ["booked", "saved", "discarded"] ).pluck(:exhibition_id)
@@ -92,7 +73,7 @@ class User < ApplicationRecord
     exhibition_to_recommand = Exhibition.where(id: exhibition_id_to_recommand)
     exhibition_id_saved = UserExhibition.where(user_id: self.id, status: "saved").pluck(:exhibition_id)
     exhibition_saved = Exhibition.where(id: exhibition_id_saved)
-    return all_exhibition_to_show = [exhibition_recommanded, exhibition_saved].flatten
+    return all_exhibition_to_show = [exhibition_to_recommand, exhibition_saved].flatten
   end
 end
 

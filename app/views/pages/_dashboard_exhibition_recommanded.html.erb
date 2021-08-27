@@ -2,7 +2,11 @@
         <% if current_user.all_favorites.count % 5 == 0 %>
           <% current_user.recomandations.each do |reco|  %>
             <div class="card-product">
+            <% if reco.photo.attached? %>
               <%= cl_image_tag reco.photo.key %>
+            <% else %>
+              <img src="https://source.unsplash.com/collection/1163637/480x480" alt="">
+            <% end  %>
               <div class="card-product-infos">
                 <h2><%= reco.name %></h2>
                 <h2><%= reco.museum %><%= reco.address %></h2>

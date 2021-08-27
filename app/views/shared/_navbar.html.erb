@@ -5,7 +5,7 @@
   </button> %>
   <% if user_signed_in? %>
         <li class="nav-item dropdown">
-          <%= image_tag "https://kitt.lewagon.com/placeholder/users/ssaunier", class: "avatar dropdown-toggle", id: "navbarDropdown", data: { toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
+          <%= image_tag "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ5sLWoRkgpyzmdzD4PZ6696G_HyT85E4BzA-G0Wipt9Z5niEY7WOi6ij0-bERWFb--feA&usqp=CAU", class: "avatar dropdown-toggle", id: "navbarDropdown", data: { toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
           <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
             <%= link_to "Log out", destroy_user_session_path, method: :delete, class: "dropdown-item" %>
           </div>
@@ -17,6 +17,6 @@
       <% end %>
 
   <%= link_to "#", class: "navbar-brand" do %>
-    <%= image_tag "/assets/logo-swipart.png" %>
+    <img src="<%= image_path("logo-swipart.png")%>">
   <% end %>
 </div>

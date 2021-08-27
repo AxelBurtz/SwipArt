@@ -92,7 +92,7 @@ class User < ApplicationRecord
     exhibition_to_recommand = Exhibition.where(id: exhibition_id_to_recommand)
     exhibition_id_saved = UserExhibition.where(user_id: self.id, status: "saved").pluck(:exhibition_id)
     exhibition_saved = Exhibition.where(id: exhibition_id_saved)
-    return all_exhibition_to_show = [exhibition_recommanded, exhibition_saved].flatten
+    return all_exhibition_to_show = [exhibition_to_recommanded, exhibition_saved].flatten
   end
 end
 

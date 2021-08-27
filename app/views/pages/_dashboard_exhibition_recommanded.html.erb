@@ -2,7 +2,7 @@
         <% if current_user.all_favorites.count % 5 == 0 %>
           <% current_user.recomandations.each do |reco|  %>
             <div class="card-product">
-              <img src="https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/skateboard.jpg" />
+              <%= cl_image_tag reco.photo.key %>
               <div class="card-product-infos">
                 <h2><%= reco.name %></h2>
                 <h2><%= reco.museum %><%= reco.address %></h2>

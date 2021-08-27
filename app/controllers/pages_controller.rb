@@ -2,7 +2,11 @@ class PagesController < ApplicationController
   skip_before_action :authenticate_user!, only: [ :home ]
 
   def home
-    @artworks =  Artwork.includes(:author).where.not(id: current_user.all_favorites.pluck(:favoritable_id))
+    if current_user
+      @artworks = Artwork.includes(:author).where.not(id: current_user.all_favorites.pluck(:favoritable_id))
+    else
+      @artworks = Artwork.all
+    end
   end
 
   def dashboard

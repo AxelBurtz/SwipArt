@@ -11,8 +11,8 @@ Rails.application.routes.draw do
   end
   resources :user_exhibitions do
     collection do
-      patch "saved"
-      patch "discarded"
+      post "saved"
+      post "discarded"
     end
   end
   get 'dashboard', to: 'pages#dashboard'

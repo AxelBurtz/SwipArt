@@ -1,5 +1,4 @@
-class UserExhibitionsController < ApplicationControllere
-
+class UserExhibitionsController < ApplicationController
 
   def edit
     @user_exhibitions = UserExhibition.find(params[:id])

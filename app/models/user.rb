@@ -29,7 +29,7 @@ class User < ApplicationRecord
     Exhibition.where(mouvement: mouvement.map { |a| a[0] })
   end
 
-  def recomandations
+  def generate_recomandations
     a = recomandations_author
     b = recomandations_type
     c = recomandations_museum
@@ -68,13 +68,19 @@ class User < ApplicationRecord
     result << d
 
     exhibition_recommanded = result.flatten.uniq
-    exhibitions_ids_of_user_treated = UserExhibition.where(exhibition_id: exhibition_recommanded.pluck(:id), user_id: self.id, status: ["booked", "saved", "discarded"] ).pluck(:exhibition_id)
+    exhibitions_ids_of_user_treated = UserExhibition.where(exhibition_id: exhibition_recommanded.pluck(:id), user_id: self.id, status: ["booked", "saved","discarded"] ).pluck(:exhibition_id)
     exhibition_id_to_recommand = (exhibition_recommanded.pluck(:id) - exhibitions_ids_of_user_treated).first(3)
-    exhibition_to_recommand = Exhibition.where(id: exhibition_id_to_recommand)
+    self.current_recomandations = exhibition_id_to_recommand
+    save
+  end
+
+  def recomandations_to_display
+    exhibition_to_recommand = Exhibition.where(id: current_recomandations)
     exhibition_id_saved = UserExhibition.where(user_id: self.id, status: "saved").pluck(:exhibition_id)
     exhibition_saved = Exhibition.where(id: exhibition_id_saved)
-    return all_exhibition_to_show = [exhibition_to_recommand, exhibition_saved].flatten
-
+    user_exhibition_discarded = UserExhibition.where(status: "discarded")
+    exhibition_discarded = Exhibition.where(id: user_exhibition_discarded.pluck(:exhibition_id))
+    all_exhibition_to_show = (exhibition_to_recommand + exhibition_saved - exhibition_discarded).uniq
   end
 end
 

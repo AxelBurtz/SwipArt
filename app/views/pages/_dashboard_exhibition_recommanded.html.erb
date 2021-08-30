@@ -1,21 +1,21 @@
 <div class="container">
-        <% if current_user.all_favorites.count % 5 == 0 %>
-          <% current_user.recomandations.each do |reco|  %>
-            <div class="card-product">
-            <% if reco.photo.attached? %>
-              <%= cl_image_tag reco.photo.key %>
-            <% else %>
-              <img src="https://source.unsplash.com/collection/1163637/480x480" alt="">
-            <% end  %>
-              <div class="card-product-infos">
-                <h2><%= reco.name %></h2>
-                <h2><%= reco.museum %><%= reco.address %></h2>
-                <h2></h2>
-                <p><%= reco.start_date %></p>
-                <p> <%= reco.end_date %></p>
-              </div>
+        <% @recomandations.each do |reco|  %>
+          <div class="card-product">
+          <% if reco.photo.attached? %>
+            <%= cl_image_tag reco.photo.key %>
+          <% else %>
+            <img src="https://source.unsplash.com/collection/1163637/480x480" alt="">
+          <% end  %>
+            <div class="card-product-infos">
+              <h2><%= reco.name %></h2>
+              <h2><%= reco.museum %><%= reco.address %></h2>
+              <h2></h2>
+              <p><%= reco.start_date %></p>
+              <p> <%= reco.end_date %></p>
             </div>
-          <% end %>
+            <%= link_to "save", user_exhibitions_saved_path(exhibition_id: reco.id), method: :post %>
+            <%= link_to "discard",  user_exhibitions_discard_path(exhibition_id: reco.id), method: :post %>
+          </div>
         <% end %>
 <%# <div class="btn-ghost">Discard</div>
 <div><i class="fas fa-heart button-heart"></i></div> %>

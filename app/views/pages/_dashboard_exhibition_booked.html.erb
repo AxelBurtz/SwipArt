@@ -11,11 +11,16 @@
         </button>
       </div>
       <div class="modal-body">
-        <%= render "form", exhibition: @exhibition, review: @review %>
+        <%= simple_form_for [ exhibition, review ] do |f| %>
+        <%= f.input :content %>
+        <%= f.input :rating %>
+        <%= f.submit "Submit review", class: "btn btn-primary" %>
+        <% end %>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
         <button type="button" class="btn btn-primary">Save my review</button>
+        <%# save review on exhibition_id with the current_user %>
       </div>
     </div>
   </div>

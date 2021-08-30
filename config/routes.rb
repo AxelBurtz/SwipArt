@@ -12,12 +12,12 @@ Rails.application.routes.draw do
 
       post "user_exhibitions/saved", to: "user_exhibitions#saved"
       post "user_exhibitions/discard", to: "user_exhibitions#discard"
+      post "user_exhibitions/booking", to: "user_exhibitions#booking"
     # post "user_exhibition/saved", to: "user_exhibitions#saved"
     # post "user_exhibition/discard", to: "user_exhibitions#discard"
 
   get 'dashboard', to: 'pages#dashboard'
   resources :exhibitions, only: %i[show] do
-    resources :user_exhibitions, only: %i[ :new, :create ]
-    resources :reviews, only: %i[ :new, :create ]
+    resources :user_exhibitions, only: %i[ :new_booking, :create_booking ]
   end
 end

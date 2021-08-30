@@ -68,7 +68,7 @@ class User < ApplicationRecord
     result << d
 
     exhibition_recommanded = result.flatten.uniq
-    exhibitions_ids_of_user_treated = UserExhibition.where(exhibition_id: exhibition_recommanded.pluck(:id), user_id: self.id, status: ["booked", "saved","discarded"] ).pluck(:exhibition_id)
+    exhibitions_ids_of_user_treated = UserExhibition.where(exhibition_id: exhibition_recommanded.pluck(:id), user_id: self.id, status: ["booked", "saved", "discarded"] ).pluck(:exhibition_id)
     exhibition_id_to_recommand = (exhibition_recommanded.pluck(:id) - exhibitions_ids_of_user_treated).first(3)
     self.current_recomandations = exhibition_id_to_recommand
     save

@@ -14,8 +14,8 @@
                 <p><%= reco.start_date %></p>
                 <p> <%= reco.end_date %></p>
               </div>
-              <%= link_to "save", saved_user_exhibitions_path(@user_exhibtions) %>
-              <%= link_to "discard",  discarded_user_exhibitions_path(@user_exhibtions) %>
+              <%= link_to "save", user_exhibitions_saved_path(exhibition_id: reco.id), method: :post %>
+              <%= link_to "discard",  user_exhibitions_discard_path(exhibition_id: reco.id), method: :post %>
             </div>
           <% end %>
         <% end %>

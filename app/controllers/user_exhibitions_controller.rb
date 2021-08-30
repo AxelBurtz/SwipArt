@@ -16,13 +16,13 @@ class UserExhibitionsController < ApplicationController
     redirect_to dashboard_path
   end
 
-  def discarded
+  def discard
     @exhibition = Exhibition.find(params[:exhibition_id])
     @user_exhibition = UserExhibition.create(user: current_user, exhibition: @exhibition, status: "discarded")
     redirect_to dashboard_path
   end
 
-  private
+private
 
   def user_exhibitions_params
     params.require(:user_exhibitions).permit(:status)

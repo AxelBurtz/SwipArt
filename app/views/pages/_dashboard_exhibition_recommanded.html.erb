@@ -1,13 +1,40 @@
 <div class="container">
   <% if current_user.all_favorites.count % 5 == 0 %>
-    <% current_user.recomandations.each do |reco|  %>
+    <% current_user.generate_recomandations.each do |reco|  %>
       <div class="card-product">
       <% if reco.photo.attached? %>
         <%= cl_image_tag reco.photo.key %>
       <% else %>
         <img src="https://source.unsplash.com/collection/1163637/480x480" alt="">
       <% end  %>
-        <div class="card-product-infos">
+        <div class="card-product-infos">s="modal-title text-center" id="dashboard_exhibition_showLabel">Details of the exhibition</h5>
+22
+ 
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+23
+ 
+                    <span aria-hidden="true">&times;</span>
+24
+ 
+                  </button>
+25
+ 
+                </div>
+26
+ 
+                <div class="modal-body">
+27
+ 
+                  <div class="art-card">
+28
+ 
+                    <% if reco.photo.attached? %>
+29
+ 
+                      <%= cl_image_tag reco.photo.key, class: "img-show-reco" %>
+30
+ 
+                    <% else %>
           <h2><a href ="" class= "exhib-show-link" data-toggle="modal" data-target="#dashboard_exhibition_show_<%= reco.id %>"><%= reco.name %></a></h2>
           <h2><%= reco.museum %><%= reco.address %></h2>
           <h2></h2>

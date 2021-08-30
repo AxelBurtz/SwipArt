@@ -10,5 +10,12 @@ Rails.application.routes.draw do
       post 'dislike'
     end
   end
+
+
+      post "user_exhibitions/saved", to: "user_exhibitions#saved"
+      post "user_exhibitions/discard", to: "user_exhibitions#discard"
+    # post "user_exhibition/saved", to: "user_exhibitions#saved"
+    # post "user_exhibition/discard", to: "user_exhibitions#discard"
+
   get 'dashboard', to: 'pages#dashboard'
 end

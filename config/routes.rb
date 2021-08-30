@@ -11,4 +11,8 @@ Rails.application.routes.draw do
   end
 
   get 'dashboard', to: 'pages#dashboard'
+  resources :exhibitions, only: %i[show] do
+    resources :user_exhibitions, only: %i[ :new, :create ]
+    resources :reviews, only: %i[ :new, :create ]
+  end
 end

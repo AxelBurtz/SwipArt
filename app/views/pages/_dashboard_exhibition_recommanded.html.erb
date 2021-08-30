@@ -1,5 +1,4 @@
 <div class="container">
-  <% if current_user.all_favorites.count % 5 == 0 %>
     <% current_user.generate_recomandations.each do |reco|  %>
       <div class="card-product">
       <% if reco.photo.attached? %>
@@ -96,5 +95,4 @@
         </div>
       </div>
     <% end %>
-  <% end %>
 </div>

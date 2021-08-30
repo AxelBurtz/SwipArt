@@ -8,23 +8,22 @@
   margin: 15px;
   border-radius: 5px;
 
-
 }
 
-.card-product img {
+.card-product > img {
   height: 100%;
   width: 120px;
   object-fit: cover;
 }
 
-.card-product h2 {
+.card-product-infos > h2 {
   font-size: 14px;
   font-weight: bold;
   margin: 0;
   list-style-type: none;
 }
 
-.card-product p {
+.card-product-infos > p {
   font-size: 12px;
   line-height: 1.4;
   opacity: .7;

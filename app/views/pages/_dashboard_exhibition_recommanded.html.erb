@@ -8,17 +8,66 @@
         <img src="https://source.unsplash.com/collection/1163637/480x480" alt="">
       <% end  %>
         <div class="card-product-infos">
-          <h2><%= reco.name %></h2>
+          <h2><a href ="" class= "exhib-show-link" data-toggle="modal" data-target="#dashboard_exhibition_show_<%= reco.id %>"><%= reco.name %></a></h2>
           <h2><%= reco.museum %><%= reco.address %></h2>
           <h2></h2>
           <p><%= reco.start_date %></p>
           <p> <%= reco.end_date %></p>
+          <div class="modal fade" id="dashboard_exhibition_show_<%= reco.id %>" tabindex="-1" role="dialog" aria-labelledby="dashboard_exhibition_showLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title text-center" id="dashboard_exhibition_showLabel">Details of the exhibition</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <div class="art-card">
+                    <% if reco.photo.attached? %>
+                      <%= cl_image_tag reco.photo.key, class: "img-show-reco" %>
+                    <% else %>
+                      <img src="https://cdn.paris.fr/qfap/2021/08/05/83671_QXZpaml0IEdob3NoIGV4cG9zaXRpb24gZHUgMiBhdSAyOSBBb3V0IGRvc3NpZXIgZGUgcHJlc3NlLmpwZw==.jpg"
+                       class="img-show-reco">
+                    <% end  %>
+                    <div class="show-details">
+                      <div class="reco-box">
+                        <h2 class="description-text-reco">Description</h2>
+                        <div class="description-content-reco">
+                          <div class="desc-show">
+                            <p class = "desc-data desc-data-reco-name"><%= reco.name %></p>
+                            <p class = "desc-placeholder">Exhibitions</p>
+                          </div>
+                          <div class="desc-show">
+                            <p class = "italic desc-data-reco"><%= reco.museum %></p>
+                            <p class = "desc-placeholder">Museum</p>
+                          </div>
+                          <div class="desc-show">
+                            <p class = "desc-data-reco"><%= reco.start_date %></p>
+                            <p class = "desc-placeholder">Start date</p>
+                          </div>
+                          <div class="desc-show">
+                            <p class = "desc-data-reco"><%= reco.end_date %></p>
+                            <p class = "desc-placeholder">End date</p>
+                          </div>
+                          <div class="desc-show">
+                            <p class = "desc-data-reco"><%= reco.price_expo%></p>
+                            <p class = "desc-placeholder">Price</p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                  <button type="button" class="btn btn-primary">Book now !</button>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     <% end %>
   <% end %>
-  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#dashboard_exhibition_show">
-    Launch demo modal
-  </button>
-  <div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab"> <%= render "dashboard_exhibition_show" %></div>
 </div>

@@ -12,13 +12,20 @@ class UserExhibitionsController < ApplicationController
 
   def saved
     @exhibition = Exhibition.find(params[:exhibition_id])
-    @user_exhibition = UserExhibition.create(user: current_user, exhibition: @exhibition, status: "saved")
+    UserExhibition.create(user: current_user, exhibition: @exhibition, status: "saved")
     redirect_to dashboard_path
   end
 
   def discard
     @exhibition = Exhibition.find(params[:exhibition_id])
-    @user_exhibition = UserExhibition.create(user: current_user, exhibition: @exhibition, status: "discarded")
+    # @user_exhibition = UserExhibition.find_by(user: current_user, exhibition: @exhibition)
+    # if @user_exhibition.nil?
+    #   UserExhibition.create(user: current_user, exhibition: @exhibition, status: "discarded")
+    # else
+    #   @user_exhibition.update(status: "discarded")
+    # end
+    #refacto in one line
+    UserExhibition.find_or_create_by(user: current_user, exhibition: @exhibition).update(status: "discarded")
     redirect_to dashboard_path
   end
 

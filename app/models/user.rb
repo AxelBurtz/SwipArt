@@ -82,6 +82,10 @@ class User < ApplicationRecord
     exhibition_discarded = Exhibition.where(id: user_exhibition_discarded.pluck(:exhibition_id))
     all_exhibition_to_show = (exhibition_to_recommand + exhibition_saved - exhibition_discarded).uniq
   end
+
+  def user_exhibition(exhibition_id)
+    UserExhibition.find_by(user: self, exhibition_id: exhibition_id)
+  end
 end
 
 

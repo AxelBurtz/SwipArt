@@ -18,7 +18,10 @@ class UserExhibitionsController < ApplicationController
     else
       user_exhibition.update(status: "saved")
     end
-    redirect_to dashboard_path
+    respond_to do |format|
+      format.html { redirect_to dashboard_path }
+      format.json { render json: {saved: !user_exhibition.status.nil? } }
+    end
   end
 
   def discard

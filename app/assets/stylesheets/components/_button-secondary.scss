@@ -37,10 +37,13 @@
   // display: block;
 }
 
-.button-heart {
-color: rgb(185, 166, 166);
+.button-heart, .button-heart:hover {
+  color: rgb(185, 166, 166);
 }
 
-.button-heart:hover {
- color: rgb(209, 12, 12)
+.button-heart.active {
+  color: rgb(209, 12, 12);
+  &:hover {
+    color: rgb(209, 12, 12);
+  }
 }

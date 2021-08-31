@@ -3,7 +3,6 @@
         <div class="card-title d-flex px-4">
             <p class="item text-muted"><%= @exhibition.name %><label class="register">&reg;</label></p>
             <p><%= @exhibition.price_expo %></p>
-            <%= simple_form_for [@exhibition, @user_exhibition  ]  do |f| %>
         </div>
         <div class="card-body">
             <p class="text-muted">Your payment details</p>
@@ -12,6 +11,7 @@
         </div>
         <div class="footer text-center p-0">
             <div class="col-lg-12 col-12 p-0">
+            <%= simple_form_for [@exhibition, @user_exhibition  ]  do |f| %>
                 <%= f.button :submit, html: { class: "order" } %>
             <% end %>
             </div>

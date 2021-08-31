@@ -51,11 +51,6 @@ class UserExhibitionsController < ApplicationController
     redirect_to dashboard_path
   end
 
-  def done
-    exhibition = Exhibition.find(params[:exhibition_id])
-    user_exhibition = UserExhibition.find_by(user: user, exhibition: exhibition)
-  end
-
 private
 
   def user_exhibitions_params

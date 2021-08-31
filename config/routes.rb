@@ -12,8 +12,8 @@ Rails.application.routes.draw do
   end
 
 
-      post "user_exhibitions/saved", to: "user_exhibitions#saved"
-      post "user_exhibitions/discard", to: "user_exhibitions#discard"
+  get "user_exhibitions/saved", to: "user_exhibitions#saved"
+  post "user_exhibitions/discard", to: "user_exhibitions#discard"
 
 
   get 'dashboard', to: 'pages#dashboard'

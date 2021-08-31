@@ -13,5 +13,6 @@ class PagesController < ApplicationController
     @all_artworks_liked_id = current_user.all_favorites.pluck(:favoritable_id)
     @all_artworks_liked =  Artwork.where(id: @all_artworks_liked_id)
     @recomandations = current_user.recomandations_to_display
+    @user = current_user
   end
 end

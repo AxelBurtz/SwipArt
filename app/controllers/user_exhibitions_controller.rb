@@ -12,7 +12,12 @@ class UserExhibitionsController < ApplicationController
 
   def saved
     @exhibition = Exhibition.find(params[:exhibition_id])
-    UserExhibition.create(user: current_user, exhibition: @exhibition, status: "saved")
+    user_exhibition = UserExhibition.find_or_create_by(user: current_user, exhibition: @exhibition)
+    if user_exhibition.status == "saved"
+      user_exhibition.update(status: nil)
+    else
+      user_exhibition.update(status: "saved")
+    end
     redirect_to dashboard_path
   end
 

@@ -102,15 +102,6 @@ ActiveRecord::Schema.define(version: 2021_08_30_123920) do
     t.index ["scope"], name: "index_favorites_on_scope"
   end
 
-  create_table "likes", force: :cascade do |t|
-    t.bigint "user_id", null: false
-    t.bigint "artwork_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["artwork_id"], name: "index_likes_on_artwork_id"
-    t.index ["user_id"], name: "index_likes_on_user_id"
-  end
-
   create_table "reviews", force: :cascade do |t|
     t.text "content"
     t.integer "rating"
@@ -160,8 +151,6 @@ ActiveRecord::Schema.define(version: 2021_08_30_123920) do
   add_foreign_key "exhibition_authors", "exhibitions"
   add_foreign_key "exhibition_types", "exhibitions"
   add_foreign_key "exhibition_types", "types"
-  add_foreign_key "likes", "artworks"
-  add_foreign_key "likes", "users"
   add_foreign_key "reviews", "exhibitions"
   add_foreign_key "reviews", "users"
   add_foreign_key "user_exhibitions", "exhibitions"

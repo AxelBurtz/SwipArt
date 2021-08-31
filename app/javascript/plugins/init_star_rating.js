@@ -7,4 +7,5 @@ const initStarRating = () => {
   });
 };
 
+
 export { initStarRating };

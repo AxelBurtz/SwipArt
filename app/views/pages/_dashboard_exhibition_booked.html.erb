@@ -1,4 +1,18 @@
-
-<%# si la date est passée le formulaire/modal est généré
-<%# review  %>
-<!-- Modal -->
+<div class="container">
+    <% UserExhibition.where(status: "booked", user: user).each do |user_exhibition| %>
+      <div class="card-product">
+      <% if user_exhibition.exhibition.photo.attached? %>
+        <%= cl_image_tag user_exhibition.exhibition.photo.key %>
+      <% else %>
+        <img src="https://source.unsplash.com/collection/1163637/480x480" alt="">
+      <% end  %>
+        <div class="card-product-infos">
+          <h2><%= user_exhibition.exhibition.name %></h2>
+          <h2><a href ="" class= "exhib-show-link" data-toggle="modal" data-target="#dashboard_exhibition_show_<%= user_exhibition.exhibition.id %>"><%= user_exhibition.exhibition.name %></a></h2>
+          <h2><%= user_exhibition.exhibition.museum %><%= user_exhibition.exhibition.address %></h2>
+          <p><%= user_exhibition.exhibition.start_date %></p>
+          <p> <%= user_exhibition.exhibition.end_date %></p>
+        </div>
+      </div>
+    <% end %>
+</div>

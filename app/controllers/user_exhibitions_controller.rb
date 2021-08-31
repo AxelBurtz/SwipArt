@@ -29,6 +29,23 @@ class UserExhibitionsController < ApplicationController
   redirect_to dashboard_path
   end
 
+  def new
+    @exhibition = Exhibition.find(params[:exhibition_id])
+    @user_exhibition = UserExhibition.new
+  end
+
+  def create
+    user = current_user
+    exhibition = Exhibition.find(params[:exhibition_id])
+    user_exhibition = UserExhibition.find_by(user: user, exhibition: exhibition)
+    if user_exhibition.nil?
+      UserExhibition.create(user: user, exhibition: exhibition, status: "booked")
+    else
+      user_exhibition.update(status: "booked")
+    end
+    redirect_to dashboard_path
+  end
+
 private
 
   def user_exhibitions_params

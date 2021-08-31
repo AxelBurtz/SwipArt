@@ -1,7 +1,6 @@
 <%# exposition déjà éffectuée et notée %>
 <%# exhibition_done depend on the current user with review and rate saved %>
 
-
 <div class="container">
     <% UserExhibition.where(user: current_user, status: "done").each do |user_exhib|  %>
       <div class="card-product">
@@ -13,7 +12,6 @@
         <div class="card-product-infos">
           <h2><a href ="" class= "exhib-done-link" data-toggle="modal" data-target="#dashboard_done_show_<%= user_exhib.exhibition.id %>"><%= user_exhib.exhibition.name %></a></h2>
           <h2><%= user_exhib.exhibition.museum %><%= user_exhib.exhibition.address %></h2>
-
           <div class="modal fade" id="dashboard_done_show_<%= user_exhib.exhibition.id %>" tabindex="-1" role="dialog" aria-labelledby="dashboard_done_showLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
               <div class="modal-content">
@@ -43,12 +41,23 @@
                             <p class = "italic desc-data-done"><%= user_exhib.exhibition.museum %></p>
                             <p class = "desc-placeholder">Museum</p>
                           </div>
+
+                          <%# a changer en date de visite booking  %>
                           <div class="desc-done">
                             <p class = "desc-data-done"><%= user_exhib.exhibition.start_date %></p>
                             <p class = "desc-placeholder">Visited on</p>
                           </div>
                         </div>
                         <h2 class="description-text-done">My experience</h2>
+                        <%if user_exhib.exhibition.reviews.empty? %>
+                          <%= simple_form_for [ user_exhib.exhibition, Review.new ] do |f| %>
+                            <%= f.input :content %>
+                            <div class="global-form-align">
+                              <%= f.input :rating, collection: (1..5).to_a, label: "Rate your experience", class: "global-form-star" %>
+                              <%= f.submit "Submit review", class: "btn btn-success global-form-submit" %>
+                            </div>
+                          <% end %>
+                        <% else %>
                         <div class="description-content-done">
                             <div class="desc-done">
                               <p class = "desc-data-done"><%= user_exhib.exhibition.reviews.first.rating %> <i class="far fa-star star-done-show"></i></p>
@@ -59,14 +68,15 @@
                               <p class = "desc-placeholder">Commentaire</p>
                             </div>
                         </div>
+                        <% end %>
                       </div>
                     </div>
                   </div>
                 </div>
-                <div class="modal-footer">
+                <%# <div class="modal-footer">
                   <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                   <button type="button" class="btn btn-primary">Book now !</button>
-                </div>
+                </div> %>
               </div>
             </div>
           </div>

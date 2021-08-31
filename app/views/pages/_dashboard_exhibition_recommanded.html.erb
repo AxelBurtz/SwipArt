@@ -13,6 +13,9 @@
           <h2></h2>
           <p><%= reco.start_date %></p>
           <p> <%= reco.end_date %></p>
+          <%= link_to "", user_exhibitions_saved_path(exhibition_id: reco.id), method: :post, class: "fas fa-heart button-heart" %>
+          <%= link_to "",  user_exhibitions_discard_path(exhibition_id: reco.id), method: :post, class: "far fa-times-circle" %>
+                <%# Modal exhibition show %>
           <div class="modal fade" id="dashboard_exhibition_show_<%= reco.id %>" tabindex="-1" role="dialog" aria-labelledby="dashboard_exhibition_showLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
               <div class="modal-content">
@@ -61,7 +64,7 @@
                 </div>
                 <div class="modal-footer">
                   <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                  <button type="button" class="btn btn-primary">Book now !</button>
+                  <%= link_to "Book now !", new_exhibition_user_exhibition_path(exhibition_id: reco.id), class: "btn btn-primary" %>
                 </div>
               </div>
             </div>

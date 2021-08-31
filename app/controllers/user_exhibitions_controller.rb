@@ -26,27 +26,24 @@ class UserExhibitionsController < ApplicationController
     # end
     #refacto in one line
     UserExhibition.find_or_create_by(user: current_user, exhibition: @exhibition).update(status: "discarded")
-    redirect_to dashboard_path
+  redirect_to dashboard_path
   end
 
-  def new_booking
+  def new
     @exhibition = Exhibition.find(params[:exhibition_id])
-    @user_exhibition = UserExhibition.new_booking
-  end 
-  
-  def create_booking
-    @exhibition = Exhibition.find(params[:exhibition_id])
-    if user_exhibition.nil?
-    UserExhibition.find_by(user: current_user, exhibition: @exhibition).update(status: "booked")
-    else
-      UserExhibition.create(user: current_user, exhibition: @exhibition, status: "booked")
-    end 
-    # @et_inchallah_ca_marche
-    # redirect_to user_exhibitions_saved
-  end  
+    @user_exhibition = UserExhibition.new
+  end
 
-  def booking
-    redirect_to dashboard_path    
+  def create
+    user = current_user
+    exhibition = Exhibition.find(params[:exhibition_id])
+    user_exhibition = UserExhibition.find_by(user: user, exhibition: exhibition)
+    if user_exhibition.nil?
+      UserExhibition.create(user: user, exhibition: exhibition, status: "booked")
+    else
+      user_exhibition.update(status: "booked")
+    end
+    redirect_to dashboard_path
   end
 
 private

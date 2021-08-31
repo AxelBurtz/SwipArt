@@ -6,7 +6,6 @@ class UserExhibition < ApplicationRecord
   after_create :exhibition_done
 
   def exhibition_done
-    return unless status == "booked"
     UpdateUserExhibitionAsDoneJob.set(wait_until: date).perform_later(self)
   end
 end

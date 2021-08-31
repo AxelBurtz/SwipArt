@@ -63,3 +63,16 @@
 .star-done-show {
   color: #FFD700;
 }
+
+// CSS POUR LE FORMULAIRE
+
+.global-form-align {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  padding: 3px 0px;
+}
+
+.review_rating {
+    margin-bottom: 0;
+}

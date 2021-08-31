@@ -1,36 +1,43 @@
-
-
-<h1>Pages#home</h1>
-<p>Find me in app/views/pages/home.html.erb</p>
-
-<% @artworks.each do |artwork| %>
-
-<%= link_to "like", artwork_like_path(artwork), method: :post %>
-<% end %>
-
-<div data-controller="swiper">
-  <div class="swiper-container mySwiper">
-    <div class="swiper-wrapper">
-      <div class="swiper-slide">Slide 1</div>
-      <div class="swiper-slide">Slide 2</div>
-      <div class="swiper-slide">Slide 3</div>
-      <div class="swiper-slide">Slide 4</div>
-      <div class="swiper-slide">Slide 5</div>
-      <div class="swiper-slide">Slide 6</div>
-      <div class="swiper-slide">Slide 7</div>
-      <div class="swiper-slide">Slide 8</div>
-      <div class="swiper-slide">Slide 9</div>
-    </div>
-  </div>
-</div>
-
-  <div class="global">
-    <img class="img-show" src="https://upload.wikimedia.org/wikipedia/commons/b/bc/Amedeo_Modigliani_032.jpg" width= 100% alt="ok">
-
-    <div class="show-details">
-      <div class="box">
-        <h2>Artist </h2>
-        <p>Uses data from past projects to provide better delivery estimates</p>
+<div class="swiper-container mySwiper" data-controller="swiper">
+  <div class="swiper-wrapper">
+    <% @artworks.each_with_index do |artwork, index| %>
+      <div class="swiper-slide" data-swiper-target="slide" data-id="<%= rand(artwork.id) %>" data-like-url="<%= like_artwork_path(artwork) %>">
+        <div class="art-card">
+          <% if artwork.photo.attached? %>
+            <%= cl_image_tag artwork.photo.key, class: "img-show" %>
+          <% else %>
+            <img src="https://cdn.paris.fr/qfap/2021/08/05/83671_QXZpaml0IEdob3NoIGV4cG9zaXRpb24gZHUgMiBhdSAyOSBBb3V0IGRvc3NpZXIgZGUgcHJlc3NlLmpwZw==.jpg" alt="">
+          <% end  %>
+          <div class="show-details">
+            <div class="artwork-box">
+              <h2 class="description-text">Description</h2>
+              <div class="description-content">
+                <div class="desc-show">
+                  <p class = "desc-data desc-data-author"><%= artwork.author.name %></p>
+                  <p class = "desc-placeholder">Artist</p>
+                </div>
+                <div class="desc-show">
+                  <p class = "italic desc-data"><%= artwork.title %></p>
+                  <p class = "desc-placeholder">Titre</p>
+                </div>
+                <div class="desc-show">
+                  <p class = "desc-data"><%= artwork.mouvement %></p>
+                  <p class = "desc-placeholder">Mouvement</p>
+                </div>
+                <div class="desc-show">
+                  <p class = "desc-data"><%= artwork.type.name %></p>
+                  <p class = "desc-placeholder">Type</p>
+                </div>
+                <div class="desc-show">
+                  <p class = "desc-data"><%= artwork.museum %></p>
+                  <p class = "desc-placeholder">Musée</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-    </div>
+    <% end %>
   </div>
+  <div class="swiper-pagination"></div>
+</div>

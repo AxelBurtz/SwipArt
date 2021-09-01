@@ -16,9 +16,11 @@
             <% end %>
           </div>
           <h2><a href ="" class= "exhib-show-link" data-toggle="modal" data-target="#dashboard_exhibition_show_<%= reco.id %>"><%= reco.name %></a></h2>
-          <h2><%= reco.museum %><%= reco.address %></h2>
+          <%# <h2><%= reco.museum %>
+          <%# <%= reco.address</h2> %>
           <p><%= reco.start_date %></p>
-          <p> <%= reco.end_date %></p>
+          <p><%= reco.end_date %></p>
+          <p><a href ="" class= "exhib-show-link" data-toggle="modal" data-target="#dashboard_exhibition_show_<%= reco.id %>"><i class="far fa-eye"></i>View details</p></a>
           
                 <%# Modal exhibition show %>
           

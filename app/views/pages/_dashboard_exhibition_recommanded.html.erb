@@ -6,7 +6,7 @@
       <% else %>
         <img src="https://source.unsplash.com/collection/1163637/480x480" alt="">
       <% end  %>
-        <div class="card-product-infos">
+        <div class="card-product-infos title">
           <div class="exhibition-actions">
             <%= link_to user_exhibitions_saved_path(exhibition_id: reco.id), class: "button-heart #{"active" if !@user.user_exhibition(reco.id)&.status.nil? }" do %>
               <i class="fas fa-heart"></i> 
@@ -15,11 +15,12 @@
               <i class="far fa-times-circle"></i>
             <% end %>
           </div>
-          <h2><a href ="" class= "exhib-show-link" data-toggle="modal" data-target="#dashboard_exhibition_show_<%= reco.id %>"><%= reco.name %></a></h2>
-          <h2><%= reco.museum %><%= reco.address %></h2>
-          <p><%= reco.start_date %></p>
-          <p> <%= reco.end_date %></p>
-          
+          <h2 class="card-title"><a href ="" class= "exhib-show-link" data-toggle="modal" data-target="#dashboard_exhibition_show_<%= reco.id %>"><%= reco.name %></a></h2>
+          <%# <h2><%= reco.museum %>
+          <%# <%= reco.address</h2> %>
+          <p><i class="far fa-flag"></i>From:<%= (reco.start_date)&.strftime("%d %b of %Y") %></p> 
+          <p><i class="fas fa-flag-checkered"></i>To:<%= (reco.end_date)&.strftime("%d %b of %Y") %> </p>
+           
                 <%# Modal exhibition show %>
           
           <div class="modal fade" id="dashboard_exhibition_show_<%= reco.id %>" tabindex="-1" role="dialog" aria-labelledby="dashboard_exhibition_showLabel" aria-hidden="true">

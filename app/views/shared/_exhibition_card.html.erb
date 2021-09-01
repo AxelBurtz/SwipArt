@@ -52,6 +52,33 @@
                             <p class = "italic desc-data-reco"><%= reco.museum %></p>
                             <p class = "desc-placeholder">Museum</p>
                           </div>
+                           <% if ["done"].include?(@user.user_exhibition(reco.id)&.status) %>
+                           <div class="desc-done">
+                            <p class = "desc-data-done"><%= reco.start_date %></p>
+                            <p class = "desc-placeholder">Visited on</p>
+                          </div> 
+                          <h2 class="description-text-done">My experience</h2>
+                        <%if reco.reviews.empty? %>
+                          <%= simple_form_for [ reco, Review.new ] do |f| %>
+                            <%= f.input :content %>
+                            <div class="global-form-align">
+                              <%= f.input :rating, collection: (1..5).to_a, label: "Rate your experience", class: "global-form-star" %>
+                              <%= f.submit "Submit review", class: "btn btn-success global-form-submit" %>
+                            </div>
+                          <% end %>
+                        <% else %>
+                        <div class="description-content-done">
+                            <div class="desc-done">
+                              <p class = "desc-data-done"><%= reco.reviews.first.rating %> <i class="far fa-star star-done-show"></i></p>
+                              <p class = "desc-placeholder">Rating</p>
+                            </div>
+                            <div class="desc-done">
+                              <p class = "desc-data-done"><%= reco.reviews.first.content%></p>
+                              <p class = "desc-placeholder">Commentaire</p>
+                            </div>
+                        </div>
+                        <% end %>
+                          <% else %>
                           <div class="desc-show">
                             <p class = "desc-data-reco"><%= reco.start_date %></p>
                             <p class = "desc-placeholder">Start date</p>
@@ -64,6 +91,7 @@
                             <p class = "desc-data-reco"><%= reco.price_expo%></p>
                             <p class = "desc-placeholder">Price</p>
                           </div>
+                           <% end %> 
                         </div>
                       </div>
                     </div>
@@ -71,7 +99,9 @@
                 </div>
                 <div class="modal-footer">
                   <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                  <%= link_to "Book now !", new_exhibition_user_exhibition_path(exhibition_id: reco.id), class: "btn btn-primary" %>
+                  <% if !["booked", "done"].include?(@user.user_exhibition(reco.id)&.status) %>
+                    <%= link_to "Book now !", new_exhibition_user_exhibition_path(exhibition_id: reco.id), class: "btn btn-primary" %>
+                  <% end %>
                 </div>
               </div>
             </div>

@@ -76,4 +76,4 @@ CSV.foreach(filepath_exhib_nn, csv_options) do |row|
   end
 end
 
-UserExhibition.create(exhibition: Exhibition.first, user: User.first, status: "done", date: 2.days.ago)
+# UserExhibition.create(exhibition: Exhibition.first, user: User.first, status: "done", date: 2.days.ago)

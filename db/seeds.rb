@@ -48,7 +48,7 @@ CSV.foreach(filepath_artworks, csv_options) do |row|
   if !image ||
      (image[1]||image[0]) > 3400 ||
      !(image[1].fdiv(image[0]) > 1.2 && image[1].fdiv(image[0]) < 1.8)
-    puts "width : #{image[0]} height :#{image[1]} Ratio = #{image[1].fdiv(image[0])}: Image is too big "
+    puts "width : #{image[0]} height :#{image[1]} Ratio = #{image[1].fdiv(image[0])}: Image is too big " if image
   else
     author = Author.where(name: row[0]).first_or_create(name: row[0])
     type = Type.where(name: row[5]).first_or_create(name: row[5])
@@ -76,4 +76,8 @@ CSV.foreach(filepath_exhib_nn, csv_options) do |row|
   end
 end
 
+begin
 UserExhibition.create(exhibition: Exhibition.first, user: User.first, status: "done", date: 2.days.ago)
+
+rescue NotImplementedError
+end

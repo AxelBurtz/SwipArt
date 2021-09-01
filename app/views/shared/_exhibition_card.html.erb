@@ -97,12 +97,12 @@
                     </div>
                   </div>
                 </div>
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                  <% if !["booked", "done"].include?(@user.user_exhibition(reco.id)&.status) %>
-                    <%= link_to "Book now !", new_exhibition_user_exhibition_path(exhibition_id: reco.id), class: "btn btn-primary" %>
-                  <% end %>
-                </div>
+                <% if !["booked", "done"].include?(@user.user_exhibition(reco.id)&.status) %>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <%= link_to "Book now !", new_exhibition_user_exhibition_path(exhibition_id: reco.id), class: "btn btn-primary", data: {turbolinks: false} %>
+                  </div>
+                <% end %>
               </div>
             </div>
           </div>

@@ -9,33 +9,66 @@
 }
 
 .card_home_infos {
-  background: rgba(0,0,0,0.07);
+  background: rgba(0,0,0,0.11 );
   width: 100%;
   color: white;
   box-shadow: 0px 0px 40px rgba(0, 0, 0, 0.2);
+  text-align: left;
+  padding-left: 8px;
+}
 
+.museum_infos {
+  display: flex;
+  align-items: center;
+  padding-bottom: 10px;
+}
+
+.image_museum_infos {
+  padding: 0px 14px 0px;
+  font-size: 22px;
+  position: relative;
+  top: -1px;
 }
 
 .text_infos {
   font-weight: 600;
   font-size: 24px;
   display: flex;
-  align-items: center;
+  flex-direction: column;
   margin: 8px 0px;
+  justify-content: flex-start;
+}
+
+.text_infos_title {
+  font-weight: bold;
+}
+
+.text_infos_author {
+  font-weight: lighter;
 }
 
 .tag_infos {
   display: flex;
-  align-items: flex-start;
-  padding: 0px;
+  align-items: center;
+  padding: auto;
   margin: 8px 0px;
+
 }
 
 .tag_bubble_infos {
   display: flex;
-  align-items: flex-start;
-  padding: 8px;
+  justify-content: center;
   background: #03989E;
   border-radius: 30px;
-  margin: 0px 8px;
+  margin-right: 8px;
+  padding: 2px 12px;
+}
+
+.tag_text_infos {
+  text-align: center;
+  margin-bottom: 0;
+}
+
+.text_museum_infos {
+  margin-bottom: 0px;
 }

@@ -2,8 +2,8 @@
 <div class="card_home" style="background-image: url('<%= artwork.photo.attached? ? cl_image_path(artwork.photo.key) : "https://cdn.paris.fr/qfap/2021/08/05/83671_QXZpaml0IEdob3NoIGV4cG9zaXRpb24gZHUgMiBhdSAyOSBBb3V0IGRvc3NpZXIgZGUgcHJlc3NlLmpwZw==.jpg" %>')">
   <div class="card_home_infos">
     <div class="text_infos">
-      <h1><%= artwork.title %></h1>
-      <h2><%= artwork.author.name %></h2>
+      <h4 class="text_infos_title"><%= artwork.title %></h4>
+      <h5 class="text_infos_author"><%= artwork.author.name %></h5>
     </div>
     <div class="tag_infos">
       <div class="tag_bubble_infos">

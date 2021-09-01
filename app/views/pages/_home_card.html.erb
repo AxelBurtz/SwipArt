@@ -1,0 +1,21 @@
+
+<div class="card_home" style="background-image: url('<%= artwork.photo.attached? ? cl_image_path(artwork.photo.key) : "https://cdn.paris.fr/qfap/2021/08/05/83671_QXZpaml0IEdob3NoIGV4cG9zaXRpb24gZHUgMiBhdSAyOSBBb3V0IGRvc3NpZXIgZGUgcHJlc3NlLmpwZw==.jpg" %>')">
+  <div class="card_home_infos">
+    <div class="text_infos">
+      <h4 class="text_infos_title"><%= artwork.title %></h4>
+      <h5 class="text_infos_author"><%= artwork.author.name %></h5>
+    </div>
+    <div class="tag_infos">
+      <div class="tag_bubble_infos">
+        <p class="tag_text_infos"><%= artwork.mouvement %></p>
+      </div>
+      <div class="tag_bubble_infos">
+        <p class="tag_text_infos"><%= artwork.type.name %></p>
+      </div>
+    </div>
+    <div class="museum_infos">
+      <i class="fas fa-eye image_museum_infos" ></i>
+      <p class="text_museum_infos"><%= artwork.museum %></p>
+    </div>
+  </div>
+</div>

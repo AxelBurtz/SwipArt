@@ -5,7 +5,7 @@ filepath_exhib = "exhibitionslist.csv"
 filepath_artworks = "artworks-sans-jpg.csv"
 filepath_exhib_nn = "exhib-nn.csv"
 
-csv_options = { col_sep: ';', headers: :first_row, encoding: 'utf-8' }
+csv_options = { col_sep: ';', headers: :first_row, encoding: 'iso-8859-1:utf-8' }
 
 puts "Deleting all"
 Artwork.delete_all
@@ -42,11 +42,13 @@ CSV.foreach(filepath_exhib, csv_options) do |row|
   end
 end
 
-CSV.foreach(filepath_artworks, { col_sep: ';', headers: :first_row, encoding: 'iso-8859-1:utf-8' }) do |row|
+CSV.foreach(filepath_artworks, csv_options) do |row|
   puts "Artworks"
   image = FastImage.size(row[6])
-  if !image || (image[0]||image[1]) > 2300 || (image[1] / image[0] > 1 && image[1] / image[0] < 1.7)
-    puts "image XX is too big"
+  if !image ||
+     (image[1]||image[0]) > 3400 ||
+     !(image[1].fdiv(image[0]) > 1.2 && image[1].fdiv(image[0]) < 1.8)
+    puts "width : #{image[0]} height :#{image[1]} Ratio = #{image[1].fdiv(image[0])}: Image is too big "
   else
     author = Author.where(name: row[0]).first_or_create(name: row[0])
     type = Type.where(name: row[5]).first_or_create(name: row[5])

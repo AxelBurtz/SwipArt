@@ -5,17 +5,18 @@ filepath_exhib = "exhibitionslist.csv"
 filepath_artworks = "artworks-sans-jpg.csv"
 filepath_exhib_nn = "exhib-nn.csv"
 
-csv_options = { col_sep: ';', headers: :first_row, encoding: 'iso-8859-1:utf-8' }
+csv_options = { col_sep: ';', headers: :first_row, encoding: 'utf-8' }
 
 puts "Deleting all"
 Artwork.delete_all
 ExhibitionAuthor.delete_all
 Author.delete_all
 ExhibitionType.delete_all
-User.delete_all
+UserExhibition.delete_all
+Review.delete_all
 Type.delete_all
 Exhibition.delete_all
-Review.delete_all
+User.delete_all
 
 puts "creating user"
 user1 = User.create(email: 'axel@gmail.com', password: "1234567")
@@ -27,7 +28,7 @@ user3.save!
 
 CSV.foreach(filepath_exhib, csv_options) do |row|
   image = FastImage.size(row[33])
-  if image && (image[0] || image[1]) > 2300
+  if !image || (image[0] || image[1]) > 2300
     puts "image is too big"
   else
     new_exhib = Exhibition.create(name: row[2],
@@ -41,10 +42,10 @@ CSV.foreach(filepath_exhib, csv_options) do |row|
   end
 end
 
-CSV.foreach(filepath_artworks, csv_options) do |row|
+CSV.foreach(filepath_artworks, { col_sep: ';', headers: :first_row, encoding: 'iso-8859-1:utf-8' }) do |row|
   puts "Artworks"
   image = FastImage.size(row[6])
-  if (image[0]||image[1]) > 2300
+  if !image || (image[0]||image[1]) > 2300 || (image[1] / image[0] > 1 && image[1] / image[0] < 1.7)
     puts "image XX is too big"
   else
     author = Author.where(name: row[0]).first_or_create(name: row[0])

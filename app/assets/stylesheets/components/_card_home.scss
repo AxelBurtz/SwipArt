@@ -1,0 +1,41 @@
+
+.card_home {
+  height: 80vh;
+  background-size: cover;
+  margin: 22px;
+  display: flex;
+  align-items: flex-end;
+  border-radius: 20px;
+}
+
+.card_home_infos {
+  background: rgba(0,0,0,0.07);
+  width: 100%;
+  color: white;
+  box-shadow: 0px 0px 40px rgba(0, 0, 0, 0.2);
+
+}
+
+.text_infos {
+  font-weight: 600;
+  font-size: 24px;
+  display: flex;
+  align-items: center;
+  margin: 8px 0px;
+}
+
+.tag_infos {
+  display: flex;
+  align-items: flex-start;
+  padding: 0px;
+  margin: 8px 0px;
+}
+
+.tag_bubble_infos {
+  display: flex;
+  align-items: flex-start;
+  padding: 8px;
+  background: #03989E;
+  border-radius: 30px;
+  margin: 0px 8px;
+}

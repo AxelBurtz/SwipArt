@@ -9,12 +9,15 @@
               <i class="far fa-trash-alt"></i>
             <% end %>
            <% end %>
-          <%# </div> %>
           <h2 class="card-title"><a href ="" class= "exhib-show-link" data-toggle="modal" data-target="#dashboard_exhibition_show_<%= reco.id %>"><%= reco.name %> </a></h2>
           <%# <%= reco.address</h2> %>
            <% if reco.museum %>
             <p class="card-museum"> <i class="fas fa-landmark "></i><%= (reco.museum) %> <%= reco.address %> </p>
             <% end %>
+            <div class="type-address">
+            <div class="card-type"></p><%= reco.types.first.name %> </div>
+            <div class="card-address"></p><%= reco.mouvement %></div>
+            </div>
             <p class= "card-dates">
             <% if reco.start_date %>
               <i class="far fa-calendar-alt"></i><span>From:</span><%= (reco.start_date)&.strftime("%d %b of %Y") %>
@@ -23,11 +26,15 @@
               <span>To:</span><%= (reco.end_date)&.strftime("%d %b of %Y") %>
             <% end %>
             </p>
-            <div class="type-address">
-            <div class="card-address"></p><%= reco.mouvement %></div>
-            <div class="card-type"></p><%= reco.types.first.name %> </div>
-            </div>
-            
+             <% if !["booked", "done"].include?(@user.user_exhibition(reco.id)&.status) %>
+            <%= link_to user_exhibitions_saved_path(exhibition_id: reco.id), class: "button-save #{"active" if !@user.user_exhibition(reco.id)&.status.nil? }" do %>
+              <span>Save</span>
+            <% end %>
+            <%= link_to user_exhibitions_discard_path(exhibition_id: reco.id), method: :post, class: "button-delete" do %>
+              <span>Discard</span>
+            <% end %>
+           <% end %>
+          
                 <%# Modal exhibition show %>
           
           <div class="modal fade" id="dashboard_exhibition_show_<%= reco.id %>" tabindex="-1" role="dialog" aria-labelledby="dashboard_exhibition_showLabel" aria-hidden="true">

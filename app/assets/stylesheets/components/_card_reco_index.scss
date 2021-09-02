@@ -108,3 +108,17 @@
   align-items: center;
   padding: 5px;
 }
+
+.button-save {
+  position: absolute;
+  right: 15px;
+  bottom: 10px;
+  text-decoration: none;
+}
+
+.button-delete {
+  position:absolute;
+  left: 15px;
+  bottom: 10px;
+  text-decoration: none;
+}

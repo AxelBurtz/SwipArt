@@ -1,22 +1,16 @@
   <div class="card-product">
+      <%= cl_image_tag(reco.photo.key) %>
         <div class="card-product-infos title">
           <%# <div class="exhibition-actions"> %>
-           <% if !["booked", "done"].include?(@user.user_exhibition(reco.id)&.status) %>
-            <%= link_to user_exhibitions_saved_path(exhibition_id: reco.id), class: "button-heart #{"active" if !@user.user_exhibition(reco.id)&.status.nil? }" do %>
-              <i class="fas fa-heart"></i> 
-            <% end %>
-            <%= link_to user_exhibitions_discard_path(exhibition_id: reco.id), method: :post, class: "discard-exhibition" do %>
-              <i class="far fa-trash-alt"></i>
-            <% end %>
-           <% end %>
+           
           <h2 class="card-title"><a href ="" class= "exhib-show-link" data-toggle="modal" data-target="#dashboard_exhibition_show_<%= reco.id %>"><%= reco.name %> </a></h2>
           <%# <%= reco.address</h2> %>
            <% if reco.museum %>
-            <p class="card-museum"> <i class="fas fa-landmark "></i><%= (reco.museum) %> <%= reco.address %> </p>
+            <p class="card-museum"> <i class="fas fa-landmark "></i><%= (reco.museum) %></p>
+            <p class="mt-0"> <em><%= reco.address %></em> </p>
             <% end %>
             
-            <p class="mb-0"><i class="fas fa-paint-brush"></i><%= reco.mouvement %></p>
-            <p class= "card-dates">
+            <p class= "card-dates d-block">
             <% if reco.start_date %>
               <i class="far fa-calendar-alt"></i><%= (reco.start_date)&.strftime("%d %b of %Y") %>
             <% end %>
@@ -24,26 +18,23 @@
               <span>-</span><%= (reco.end_date)&.strftime("%d %b of %Y") %>
             <% end %>
             </p>
-             <% if !["booked", "done"].include?(@user.user_exhibition(reco.id)&.status) %>
-            <%= link_to user_exhibitions_saved_path(exhibition_id: reco.id), class: "button-save #{"active" if !@user.user_exhibition(reco.id)&.status.nil? }" do %>
-              <span>Save</span>
+
+            <% if !["booked", "done"].include?(@user.user_exhibition(reco.id)&.status) %>
+            <%= link_to user_exhibitions_saved_path(exhibition_id: reco.id), class: "button-heart #{"active" if !@user.user_exhibition(reco.id)&.status.nil? }" do %>
+              <i class="fas fa-heart"></i> 
             <% end %>
-            <%= link_to user_exhibitions_discard_path(exhibition_id: reco.id), method: :post, class: "button-delete" do %>
-              <span>Discard</span>
+            <%= link_to user_exhibitions_discard_path(exhibition_id: reco.id), method: :post, class: "discard-exhibition" do %>
+              <i class="far fa-trash-alt"></i>
             <% end %>
            <% end %>
+
+
           
                 <%# Modal exhibition show %>
           
-          <div class="modal fade" id="dashboard_exhibition_show_<%= reco.id %>" tabindex="-1" role="dialog" aria-labelledby="dashboard_exhibition_showLabel" aria-hidden="true">
+          <div class="modal fade modal-reco" id="dashboard_exhibition_show_<%= reco.id %>" tabindex="-1" role="dialog" aria-labelledby="dashboard_exhibition_showLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
               <div class="modal-content">
-                <div class="modal-header">
-                  <h5 class="modal-title text-center" id="dashboard_exhibition_showLabel">Details of the exhibition</h5>
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                  </button>
-                </div>
                 <div class="modal-body">
                   <div class="art-card">
                     <% if reco.photo.attached? %>
@@ -111,8 +102,8 @@
                 </div>
                 <% if !["booked", "done"].include?(@user.user_exhibition(reco.id)&.status) %>
                   <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <%= link_to "Book now !", new_exhibition_user_exhibition_path(exhibition_id: reco.id), class: "btn btn-primary", data: {turbolinks: false} %>
+                    <p data-dismiss="modal">Close</p>
+                    <%= link_to "Book now !", new_exhibition_user_exhibition_path(exhibition_id: reco.id), class: "btn btn-ghost", data: {turbolinks: false} %>
                   </div>
                 <% end %>
               </div>

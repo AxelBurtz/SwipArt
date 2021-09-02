@@ -2,14 +2,14 @@
       <%= cl_image_tag(reco.photo.key) %>
         <div class="card-product-infos title">
           <%# <div class="exhibition-actions"> %>
-           
+
           <h2 class="card-title"><a href ="" class= "exhib-show-link" data-toggle="modal" data-target="#dashboard_exhibition_show_<%= reco.id %>"><%= reco.name %> </a></h2>
           <%# <%= reco.address</h2> %>
            <% if reco.museum %>
             <p class="card-museum"> <i class="fas fa-landmark "></i><%= (reco.museum) %></p>
             <p class="mt-0"> <em><%= reco.address %></em> </p>
             <% end %>
-            
+
             <p class= "card-dates d-block">
             <% if reco.start_date %>
               <i class="far fa-calendar-alt"></i><%= (reco.start_date)&.strftime("%d %b of %Y") %>
@@ -20,8 +20,8 @@
             </p>
 
             <% if !["booked", "done"].include?(@user.user_exhibition(reco.id)&.status) %>
-            <%= link_to user_exhibitions_saved_path(exhibition_id: reco.id), class: "button-heart #{"active" if !@user.user_exhibition(reco.id)&.status.nil? }" do %>
-              <i class="fas fa-heart"></i> 
+            <%= link_to user_exhibitions_saved_path(exhibition_id: reco.id), class: "button-heart #{"active" if !@user.user_exhibition(reco.id)&.status == "saved"}" do %>
+              <i class="fas fa-heart"></i>
             <% end %>
             <%= link_to user_exhibitions_discard_path(exhibition_id: reco.id), method: :post, class: "discard-exhibition" do %>
               <i class="far fa-trash-alt"></i>
@@ -29,9 +29,9 @@
            <% end %>
 
 
-          
+
                 <%# Modal exhibition show %>
-          
+
           <div class="modal fade modal-reco" id="dashboard_exhibition_show_<%= reco.id %>" tabindex="-1" role="dialog" aria-labelledby="dashboard_exhibition_showLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
               <div class="modal-content">
@@ -59,7 +59,7 @@
                            <div class="desc-done">
                             <p class = "desc-data-done"><%= reco.start_date %></p>
                             <p class = "desc-placeholder">Visited on</p>
-                          </div> 
+                          </div>
                           <h2 class="description-text-done">My experience</h2>
                         <%if reco.reviews.empty? %>
                           <%= simple_form_for [ reco, Review.new ] do |f| %>
@@ -94,7 +94,7 @@
                             <p class = "desc-data-reco"><%= reco.price_expo%></p>
                             <p class = "desc-placeholder">Price</p>
                           </div>
-                           <% end %> 
+                           <% end %>
                         </div>
                       </div>
                     </div>

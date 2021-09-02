@@ -78,7 +78,7 @@ class User < ApplicationRecord
     exhibition_to_recommand = Exhibition.where(id: current_recomandations)
     exhibition_id_saved = UserExhibition.where(user_id: self.id, status: "saved").pluck(:exhibition_id)
     exhibition_saved = Exhibition.where(id: exhibition_id_saved)
-    user_exhibition_discarded = UserExhibition.where(status: "discarded", status: "booked")
+    user_exhibition_discarded = UserExhibition.where(status: "discarded" ).or(UserExhibition.where(status: "booked"))
     exhibition_discarded = Exhibition.where(id: user_exhibition_discarded.pluck(:exhibition_id))
     all_exhibition_to_show = (exhibition_to_recommand + exhibition_saved - exhibition_discarded).uniq
   end

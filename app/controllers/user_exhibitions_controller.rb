@@ -34,7 +34,7 @@ class UserExhibitionsController < ApplicationController
     # end
     #refacto in one line
     UserExhibition.find_or_create_by(user: current_user, exhibition: @exhibition).update(status: "discarded")
-  redirect_to dashboard_path
+    redirect_to dashboard_path
   end
 
   def new

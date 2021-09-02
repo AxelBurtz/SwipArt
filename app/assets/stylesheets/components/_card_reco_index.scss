@@ -7,7 +7,7 @@
   border-radius: 10px;
   position: relative;
   align-items: center;
-  justify-content: center;
+  // justify-content: center;
   padding: 30px;
 }
 
@@ -71,7 +71,7 @@
   border-radius: 20px;
   background-size: cover;
   width: fit-content;
-  padding: 5px 10px;
+  // padding: 5px 10px;
   display: flex;
   font-size: 17px;
 }
@@ -80,24 +80,20 @@
   background-size: cover;
   color: #131313;
   width: fit-content;
-  padding: 5px 10px;
+  // padding: 5px 10px;
   display: flex;
   align-items: center;
   font-size: 17px;
 }
 
-.type-address {
-  display: flex;
-  justify-content: space-evenly;
-}
-
-.card-address {
+.card-tag {
   background: #e0f2f3ab;
   border-radius: 25px;
   color: #1FA3A9;
   display: flex;
   align-items: center;
-  padding: 5px;
+  padding: 10px 20px;
+  width: fit-content;
 }
 
 .card-type {

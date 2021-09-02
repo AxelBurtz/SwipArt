@@ -14,16 +14,14 @@
            <% if reco.museum %>
             <p class="card-museum"> <i class="fas fa-landmark "></i><%= (reco.museum) %> <%= reco.address %> </p>
             <% end %>
-            <div class="type-address">
-            <div class="card-type"></p><%= reco.types.first.name %> </div>
-            <div class="card-address"></p><%= reco.mouvement %></div>
-            </div>
+            
+            <p class="mb-0"><i class="fas fa-paint-brush"></i><%= reco.mouvement %></p>
             <p class= "card-dates">
             <% if reco.start_date %>
-              <i class="far fa-calendar-alt"></i><span>From:</span><%= (reco.start_date)&.strftime("%d %b of %Y") %>
+              <i class="far fa-calendar-alt"></i><%= (reco.start_date)&.strftime("%d %b of %Y") %>
             <% end %>
             <% if reco.end_date %>
-              <span>To:</span><%= (reco.end_date)&.strftime("%d %b of %Y") %>
+              <span>-</span><%= (reco.end_date)&.strftime("%d %b of %Y") %>
             <% end %>
             </p>
              <% if !["booked", "done"].include?(@user.user_exhibition(reco.id)&.status) %>

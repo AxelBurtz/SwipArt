@@ -97,4 +97,8 @@ filepath_exhib_nn = "exhib-nn-new.csv"
 #   end
 # end
 
-# UserExhibition.create(exhibition: Exhibition.first, user: User.first, status: "done", date: 2.days.ago)
+begin
+UserExhibition.create(exhibition: Exhibition.first, user: User.first, status: "done", date: 2.days.ago)
+
+rescue NotImplementedError
+end

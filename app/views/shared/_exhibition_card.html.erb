@@ -1,0 +1,110 @@
+  <div class="card-product">
+      <% if reco.photo.attached? %>
+        <%= cl_image_tag reco.photo.key %>
+      <% else %>
+        <img src="https://source.unsplash.com/collection/1163637/480x480" alt="">
+      <% end  %>
+        <div class="card-product-infos title">
+          <div class="exhibition-actions">
+           <% if !["booked", "done"].include?(@user.user_exhibition(reco.id)&.status) %>
+            <%= link_to user_exhibitions_saved_path(exhibition_id: reco.id), class: "button-heart #{"active" if !@user.user_exhibition(reco.id)&.status.nil? }" do %>
+              <i class="fas fa-heart"></i> 
+            <% end %>
+            <%= link_to user_exhibitions_discard_path(exhibition_id: reco.id), method: :post, class: "discard-exhibition" do %>
+              <i class="far fa-times-circle"></i>
+            <% end %>
+            <% end %>
+          </div>
+          <h2 class="card-title"><a href ="" class= "exhib-show-link" data-toggle="modal" data-target="#dashboard_exhibition_show_<%= reco.id %>"><%= reco.name %></a></h2>
+          <%# <h2><%= reco.museum %>
+          <%# <%= reco.address</h2> %>
+          <p><i class="far fa-flag"></i>From:<%= (reco.start_date)&.strftime("%d %b of %Y") %></p> 
+          <p><i class="fas fa-flag-checkered"></i>To:<%= (reco.end_date)&.strftime("%d %b of %Y") %> </p>
+           
+                <%# Modal exhibition show %>
+          
+          <div class="modal fade" id="dashboard_exhibition_show_<%= reco.id %>" tabindex="-1" role="dialog" aria-labelledby="dashboard_exhibition_showLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title text-center" id="dashboard_exhibition_showLabel">Details of the exhibition</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <div class="art-card">
+                    <% if reco.photo.attached? %>
+                      <%= cl_image_tag reco.photo.key, class: "img-show-reco" %>
+                    <% else %>
+                      <img src="https://cdn.paris.fr/qfap/2021/08/05/83671_QXZpaml0IEdob3NoIGV4cG9zaXRpb24gZHUgMiBhdSAyOSBBb3V0IGRvc3NpZXIgZGUgcHJlc3NlLmpwZw==.jpg"
+                       class="img-show-reco">
+                    <% end  %>
+                    <div class="show-details">
+                      <div class="reco-box">
+                        <h2 class="description-text-reco">Description</h2>
+                        <div class="description-content-reco">
+                          <div class="desc-show">
+                            <p class = "desc-data desc-data-reco-name"><%= reco.name %></p>
+                            <p class = "desc-placeholder">Exhibitions</p>
+                          </div>
+                          <div class="desc-show">
+                            <p class = "italic desc-data-reco"><%= reco.museum %></p>
+                            <p class = "desc-placeholder">Museum</p>
+                          </div>
+                           <% if ["done"].include?(@user.user_exhibition(reco.id)&.status) %>
+                           <div class="desc-done">
+                            <p class = "desc-data-done"><%= reco.start_date %></p>
+                            <p class = "desc-placeholder">Visited on</p>
+                          </div> 
+                          <h2 class="description-text-done">My experience</h2>
+                        <%if reco.reviews.empty? %>
+                          <%= simple_form_for [ reco, Review.new ] do |f| %>
+                            <%= f.input :content %>
+                            <div class="global-form-align">
+                              <%= f.input :rating, collection: (1..5).to_a, label: "Rate your experience", class: "global-form-star" %>
+                              <%= f.submit "Submit review", class: "btn btn-success global-form-submit" %>
+                            </div>
+                          <% end %>
+                        <% else %>
+                        <div class="description-content-done">
+                            <div class="desc-done">
+                              <p class = "desc-data-done"><%= reco.reviews.first.rating %> <i class="far fa-star star-done-show"></i></p>
+                              <p class = "desc-placeholder">Rating</p>
+                            </div>
+                            <div class="desc-done">
+                              <p class = "desc-data-done"><%= reco.reviews.first.content%></p>
+                              <p class = "desc-placeholder">Commentaire</p>
+                            </div>
+                        </div>
+                        <% end %>
+                          <% else %>
+                          <div class="desc-show">
+                            <p class = "desc-data-reco"><%= reco.start_date %></p>
+                            <p class = "desc-placeholder">Start date</p>
+                          </div>
+                          <div class="desc-show">
+                            <p class = "desc-data-reco"><%= reco.end_date %></p>
+                            <p class = "desc-placeholder">End date</p>
+                          </div>
+                          <div class="desc-show">
+                            <p class = "desc-data-reco"><%= reco.price_expo%></p>
+                            <p class = "desc-placeholder">Price</p>
+                          </div>
+                           <% end %> 
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <% if !["booked", "done"].include?(@user.user_exhibition(reco.id)&.status) %>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <%= link_to "Book now !", new_exhibition_user_exhibition_path(exhibition_id: reco.id), class: "btn btn-primary", data: {turbolinks: false} %>
+                  </div>
+                <% end %>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>

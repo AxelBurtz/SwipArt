@@ -1,5 +1,20 @@
+.modal-reco {
+
+  .modal-content {
+    border-radius: 10px;
+  }
+  .modal-footer {
+    justify-content: space-between;
+  }
+  .desc-data {
+    color: black;
+  }
+}
+
+
 .img-show-reco {
   width: 100%;
+  border-radius: 20px;
   // max-height: 78vh;
   // object-fit: contain;
   // height: 100%;
@@ -13,14 +28,14 @@
   border-radius: 0px 0px 5px 5px;
   // box-shadow: 0px 30px 40px -20px var(--grayishBlue);
   padding: 10px;
-  color: white;
-  background-color: rgba(0, 0, 0, 0.8);
+  // color: white;
+  // background-color: rgba(0, 0, 0, 0.8);
   text-align: start;
 }
 
 
 .desc-data-reco {
-  color: white;
+  // color: white;
   margin: 0px;
   padding: 0px;
 }
@@ -28,7 +43,7 @@
 .description-text-reco {
   writing-mode: vertical-rl;
   transform: rotateZ(-180deg);
-  border-left: #B00100 solid 4px;
+  border-left: #03989E solid 4px;
   padding-left: 10px;
   margin-left: 0px;
 }
@@ -47,6 +62,7 @@
 .exhib-show-link {
   text-decoration: none;
   color: black;
+  font-size: 20px;
 }
 
 .desc-data-reco-name {

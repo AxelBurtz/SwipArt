@@ -26,6 +26,8 @@
       <div class="main-wrapper">
         <%= yield %>
       </div>
-      <%= render 'shared/footer_menu' %>
+      <% if !(controller.controller_name == "pages" && controller.action_name == "landing") %>
+        <%= render 'shared/footer_menu' %>
+      <% end %>
   </body>
 </html>

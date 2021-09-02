@@ -15,4 +15,7 @@ class PagesController < ApplicationController
     @recomandations = current_user.recomandations_to_display
     @user = current_user
   end
+
+  def landing
+  end
 end

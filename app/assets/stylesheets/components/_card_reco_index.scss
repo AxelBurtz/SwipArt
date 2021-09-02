@@ -1,6 +1,5 @@
 .card-product {
   overflow: hidden;
-  height: 140px;
   background: white;
   box-shadow: 0 0 15px rgba(0,0,0,0.2);
   display: flex;
@@ -8,6 +7,8 @@
   border-radius: 10px;
   position: relative;
   align-items: center;
+  justify-content: center;
+  padding: 30px;
 }
 
 .card-product > img {
@@ -20,19 +21,18 @@
 
 
 .card-product-infos > p {
-  font-size: 12px;
+  font-size: 15px;
   line-height: 1.4;
   opacity: .7;
   margin-bottom: 0;
   margin-top: 8px;
   list-style-type: none;
   display: flex;
-  gap: 6px;
+  gap: 10px;
 }
 
 .card-product .card-product-infos {
-  padding: 16px;
-  flex-grow: 1;
+ 
 }
 
 // color 
@@ -49,11 +49,62 @@
   font-weight: bold;
 }
 
-.title > p {
+
+.far.fa-trash-alt{
+  position: absolute;
+  left: 10px;
+  top: 10px;
+  font-size: 18px;
+}
+
+.fa-heart {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  font-size: 20px;
+}
+
+.card-museum {
+  background: none;
+  color: #131313;
+  align-items: baseline;
+  border-radius: 20px;
+  background-size: cover;
+  width: fit-content;
+  padding: 5px 10px;
+  display: flex;
+  font-size: 17px;
+}
+.card-dates {
+  border-radius: 20px;
+  background-size: cover;
+  color: #131313;
+  width: fit-content;
+  padding: 5px 10px;
+  display: flex;
+  align-items: center;
+  font-size: 17px;
+}
+
+.type-address {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.card-address {
   background: #e0f2f3ab;
-    border-radius: 5px;
-    background-size: cover;
-    color: #03989E;
-    width: fit-content;
-    padding: 2px;
+  border-radius: 25px;
+  color: #1FA3A9;
+  display: flex;
+  align-items: center;
+  padding: 5px;
+}
+
+.card-type {
+  background: #e0f2f3ab;
+  border-radius: 25px;
+  color: #1FA3A9;
+  display: flex;
+  align-items: center;
+  padding: 5px;
 }

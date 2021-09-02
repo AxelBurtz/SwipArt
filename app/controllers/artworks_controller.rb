@@ -11,8 +11,8 @@ class ArtworksController < ApplicationController
     if @user.all_favorites.size % 5 == 0
       current_user.generate_recomandations
       respond_to do |format|
-        format.html { redirect_to dashboard_path }
-        format.json { render json: { redirect: true, url: dashboard_path } }
+        format.html { redirect_to dashboard_path(tab: "match") }
+        format.json { render json: { redirect: true, url: dashboard_path(tab: "match") } }
       end
     else
       respond_to do |format|

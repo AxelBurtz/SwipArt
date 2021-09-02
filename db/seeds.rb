@@ -46,7 +46,7 @@ CSV.foreach(filepath_exhib, { col_sep: ';', headers: :first_row, encoding: "UTF-
                       end_date: row[5],
                       museum: row[6],
                       address: row[7],
-                      price_expo: row[22],
+                      price_expo: rand(10..20),
                       mouvement: row[3])
     file = URI.open(row[24])
     new_exhib.photo.attach(io: file, filename: row[1], content_type: 'image/jpg')
@@ -82,12 +82,12 @@ CSV.foreach(filepath_exhib_nn, csv_options) do |row|
   exhibition = Exhibition.find_by(name: row[0])
   next if exhibition.nil?
   exhibition.update(mouvement: row[2])
-  if !row[3].nil? || row[3] != ""
-    author = Author.where(name: row[3]).first_or_create(name: row[3])
+  if !row[2].nil? || row[2] != ""
+    author = Author.where(name: row[2]).first_or_create(name: row[2])
     ExhibitionAuthor.create(exhibition_id: exhibition.id, author_id: author.id)
   end
-  if !row[1].nil? || row[1] != ""
-    type = Type.where(name: row[1]).first_or_create(name: row[1])
+  if !row[3].nil? || row[3] != ""
+    type = Type.where(name: row[3]).first_or_create(name: row[3])
     ExhibitionType.create(exhibition_id: exhibition.id, type_id: type.id)
   end
 end

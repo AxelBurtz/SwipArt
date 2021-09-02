@@ -14,8 +14,12 @@
       </div>
     </div>
     <div class="museum_infos">
-      <i class="fas fa-eye image_museum_infos" ></i>
-      <p class="text_museum_infos"><%= artwork.museum %></p>
+      <% if artwork.museum %>
+        <i class="fas fa-landmark image_museum_infos" ></i>
+        <p class="text_museum_infos"><%= artwork.museum %></p>
+      <% else %>
+        <p></p>
+      <% end %>
     </div>
   </div>
 </div>

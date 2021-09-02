@@ -1,5 +1,6 @@
 <div class='container'>
-    <div class="card mx-auto mt-3 col-md-10 col-10 p-0 image_booking rounded-100 text-center"> <img class='mx-auto pic w-100' src="https://i.imgur.com/kXUgBQZ.jpg" />
+    <div class="card mx-auto mt-3 col-md-10 col-10 p-0 image_booking rounded-100 text-center">
+    <%= cl_image_tag (@exhibition.photo.key) %>
         <div class="card-title d-flex px-2">
             <p class="item text-muted"><%= @exhibition.name %><label class="register">&reg;</label></p>
         </div>

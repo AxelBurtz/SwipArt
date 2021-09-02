@@ -1,0 +1,41 @@
+<div class="container">
+  <div class="footer_menu">
+
+      <%= link_to root_path, class: "footer_icon"  do %>
+        <% if params[:tab].nil? %>
+        <i class="fas fa-palette active"  style="color:#03989E"></i>
+          <p>Swip'Art</p>
+          <% else %>
+        <i class="fas fa-palette"  style="color:grey"></i>
+        <% end %>
+      <% end %>
+
+      <%= link_to dashboard_path(tab: "match"), class: "footer_icon" do %>
+        <% if params[:tab] == "match" %>
+        <i class="far fa-heart active"  style="color:#03989E"></i>
+          <p>Match</p>
+          <% else %>
+        <i class="far fa-heart"  style="color:grey"></i>
+        <% end %>
+      <% end %>
+
+      <%= link_to dashboard_path(tab: "booked"), class: "footer_icon" do %>
+        <% if params[:tab] == "booked" %>
+        <i class="fas fa-landmark active"  style="color:#03989E"></i>
+          <p>Booked</p>
+          <% else %>
+        <i class="fas fa-landmark"  style="color:grey"></i>
+        <% end %>
+      <% end %>
+
+      <%= link_to dashboard_path(tab: "done"), class: "footer_icon" do %>
+        <% if params[:tab] == "done" %>
+        <i class="far fa-eye active"  style="color:#03989E"></i>
+          <p>Seen</p>
+          <% else %>
+        <i class="far fa-eye"  style="color:grey"></i>
+        <% end %>
+      <% end %>
+
+  </div>
+</div>

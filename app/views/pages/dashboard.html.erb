@@ -1,20 +1,11 @@
-  <div class="menu-navbar" id="menu-navbar">
-    <div class="nav  nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-      <a class="nav-link active" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="true">Match</a>
-      <a class="nav-link" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-selected="false">My Booking</a>
-      <a class="nav-link" id="v-pills-messages-tab" data-toggle="pill" href="#v-pills-messages" role="tab" aria-controls="v-pills-messages" aria-selected="false">My Exhibitions</a>
-    </div>
-    <div class="tab-content" id="v-pills-tabContent">
-      <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
-        <%= render "dashboard_exhibition_recommanded" %>
-      </div>
+<% if params[:tab] == "match" || params[:tab].nil?  %>
+  <%= render "dashboard_exhibition_recommanded" %>
+<% end %>
 
-      <div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">
-        <%= render "dashboard_exhibition_booked", user: @user %>
-      </div>
+<% if params[:tab] == "booked" %>
+  <%= render "dashboard_exhibition_booked", user: @user %>
+<% end %>
 
-      <div class="tab-pane fade" id="v-pills-messages" role="tabpanel" aria-labelledby="v-pills-messages-tab">
-        <%= render "dashboard_my_exhibition_done" %>
-      </div>
-    </div>
-  </div>
+<% if params[:tab] == "done" %>
+  <%= render "dashboard_my_exhibition_done" %>
+<% end %>

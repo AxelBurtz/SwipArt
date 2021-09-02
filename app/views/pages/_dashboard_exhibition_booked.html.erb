@@ -1,4 +1,4 @@
-    <% UserExhibition.where(status: "booked", user: user).each do |user_exhibition| %>
-       <%= render "shared/exhibition_card", reco: user_exhibition.exhibition %>
-    <% end %>
-
+<h2 class="titre">My Bookings</h2>
+<% UserExhibition.where(status: "booked", user: user).each do |user_exhibition| %>
+    <%= render "shared/exhibition_card", reco: user_exhibition.exhibition %>
+<% end %>

@@ -1,5 +1,6 @@
 <div data-controller="favorite">
-    <% current_user.recomandations_to_display.each do |reco|  %>
-      <%= render "shared/exhibition_card", reco: reco %>
-    <% end %>
+  <h2 class="titre">My Recomandations</h2>
+  <% current_user.recomandations_to_display.each do |reco|  %>
+    <%= render "shared/exhibition_card", reco: reco %>
+  <% end %>
 </div>

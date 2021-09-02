@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   devise_for :users
+
   root to: 'pages#home'
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   # resources :artworks, only: %i[like dislike]
@@ -13,6 +14,7 @@ Rails.application.routes.draw do
     end
   end
 
+  get "/landing", to: "pages#landing"
 
   get "user_exhibitions/saved", to: "user_exhibitions#saved"
   post "user_exhibitions/discard", to: "user_exhibitions#discard"

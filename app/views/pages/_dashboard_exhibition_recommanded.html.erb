@@ -1,4 +1,4 @@
-<div class="container" data-controller="favorite">
+<div data-controller="favorite">
     <% current_user.recomandations_to_display.each do |reco|  %>
       <%= render "shared/exhibition_card", reco: reco %>
     <% end %>

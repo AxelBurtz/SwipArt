@@ -1,8 +1,8 @@
 <%# exposition déjà éffectuée et notée %>
 <%# exhibition_done depend on the current user with review and rate saved %>
 
-<div class="container">
-    <% UserExhibition.where(user: current_user, status: "done").each do |user_exhib|  %>
-      <%= render "shared/exhibition_card", reco: user_exhib.exhibition %>
-    <% end %>
-</div>
+
+<h2 class="titre">My Exhibitions</h2>
+<% UserExhibition.where(user: current_user, status: "done").each do |user_exhib|  %>
+  <%= render "shared/exhibition_card", reco: user_exhib.exhibition %>
+<% end %>

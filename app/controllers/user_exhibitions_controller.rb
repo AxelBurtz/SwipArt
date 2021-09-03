@@ -51,7 +51,7 @@ class UserExhibitionsController < ApplicationController
     else
       user_exhibition.update(status: "booked")
     end
-    redirect_to dashboard_path
+    redirect_to dashboard_path(tab: "booked")
   end
 
 private

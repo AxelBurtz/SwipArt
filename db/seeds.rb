@@ -82,18 +82,12 @@ CSV.foreach(filepath_exhib_nn, csv_options) do |row|
   exhibition = Exhibition.find_by(name: row[0])
   next if exhibition.nil?
   exhibition.update(mouvement: row[2])
-  if !row[2].nil? || row[2] != ""
+  if row[2].present?
     author = Author.where(name: row[2]).first_or_create(name: row[2])
-    ExhibitionAuthor.create(exhibition_id: exhibition.id, author_id: author.id)
+    ExhibitionAuthor.create!(exhibition_id: exhibition.id, author_id: author.id)
   end
-  if !row[3].nil? || row[3] != ""
+  if row[3].present?
     type = Type.where(name: row[3]).first_or_create(name: row[3])
-    ExhibitionType.create(exhibition_id: exhibition.id, type_id: type.id)
+    ExhibitionType.create!(exhibition_id: exhibition.id, type_id: type.id)
   end
-end
-
-begin
-UserExhibition.create(exhibition: Exhibition.first, user: User.first, status: "done", date: 2.days.ago)
-
-rescue NotImplementedError
 end

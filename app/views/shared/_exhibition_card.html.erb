@@ -12,10 +12,10 @@
 
             <p class= "card-dates d-block">
             <% if reco.start_date %>
-              <i class="far fa-calendar-alt"></i><%= (reco.start_date)&.strftime("%d %b of %Y") %>
+              <i class="far fa-calendar-alt"></i><%= (reco.start_date)&.strftime("%d %b %Y") %>
             <% end %>
             <% if reco.end_date %>
-              <span>-</span><%= (reco.end_date)&.strftime("%d %b of %Y") %>
+              <span>-</span><%= (reco.end_date)&.strftime("%d %b %Y") %>
             <% end %>
             </p>
 
@@ -91,7 +91,7 @@
                             <p class = "desc-placeholder">End date</p>
                           </div>
                           <div class="desc-show">
-                            <p class = "desc-data-reco"><%= reco.price_expo%></p>
+                            <p class = "desc-data-reco"><%= reco.price_expo %> €</p>
                             <p class = "desc-placeholder">Price</p>
                           </div>
                            <% end %>

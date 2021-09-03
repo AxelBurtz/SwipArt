@@ -46,7 +46,7 @@ CSV.foreach(filepath_exhib, { col_sep: ';', headers: :first_row, encoding: "UTF-
                       end_date: row[5],
                       museum: row[6],
                       address: row[7],
-                      price_expo: rand(10..20),
+                      price_expo: 10,
                       mouvement: row[3])
     file = URI.open(row[24])
     new_exhib.photo.attach(io: file, filename: row[1], content_type: 'image/jpg')
